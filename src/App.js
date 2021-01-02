@@ -1,9 +1,9 @@
 import React from 'react'
 import './App.css'
-import { Grid, Slider, Divider } from '@material-ui/core'
-import { HuePicker } from 'react-color'
+import { Divider,Button } from '@material-ui/core'
 import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
+import html2canvas from 'html2canvas'
 
 class App extends React.Component { 
     data = []
@@ -86,12 +86,21 @@ class App extends React.Component {
         this.setState({list: this.data})
     }
 
+    createImage(){
+        html2canvas(document.querySelector('#canvas')).then(canvas => {
+            document.body.appendChild(canvas)
+        })
+    }
+
     render(){
         return(
             <div>
                 <h1>Stamp artist</h1>
                 <Canvas onClick={this.handleClick} data={this.data} />
                 <Divider variant="middle" />
+                <Button variant="contained" color="primary" onClick={() => this.createImage()}>
+                    create img
+                </Button>
                 <Palette
                     conf={this.state.conf}
                     preview={this.state.preview}

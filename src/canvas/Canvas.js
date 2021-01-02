@@ -2,10 +2,10 @@ import React from 'react'
 
 class Canvas extends React.Component{
     canvas_style = {
-        width: "100%",
+        width: "98%",
         height: "500px",
         border: "2px solid #808080",
-        marginBottom: "30px",
+        margin: "0 auto 20px",
     }
 
     stamp(stamp_data){
@@ -23,7 +23,7 @@ class Canvas extends React.Component{
     }
     render(){
         return(
-            <div style={this.canvas_style} onClick={this.props.onClick}>
+            <div id="canvas" style={this.canvas_style} onClick={this.props.onClick}>
                 {this.props.data.map((value) => this.stamp(value))}
             </div>
         )

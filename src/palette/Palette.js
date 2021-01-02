@@ -6,6 +6,10 @@ import Preview from './preview/Preview'
 
 class Palette extends React.Component {
 
+    palette_style = {
+        marginBottom: "10px"
+    }
+
     handleChangeColor = (color) => {
         let event = {
             target: {
@@ -17,7 +21,7 @@ class Palette extends React.Component {
 
     render(){
         return (
-            <div>
+            <div style={this.palette_style}>
                 <Grid container spacing={6} alignItems="center" justify="center">
                     <Grid item xs={6}>
                         <Grid item xs={12}>
