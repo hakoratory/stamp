@@ -5,7 +5,7 @@ import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
 import html2canvas from 'html2canvas'
 import { connect } from 'react-redux'
-import { add, change } from './redux/Store'
+import { add, change, purge, pause, flush } from './redux/Store'
 
 class App extends React.Component { 
     constructor(props){
@@ -34,6 +34,15 @@ class App extends React.Component {
                 <Divider variant="middle" />
                 <Button variant="contained" color="primary" onClick={() => this.createImage()}>
                     create img
+                </Button>
+                <Button variant="contained" color="primary" onClick={() => purge()}>
+                    purge
+                </Button>
+                <Button variant="contained" color="primary" onClick={() => pause()}>
+                    pause
+                </Button>
+                <Button variant="contained" color="primary" onClick={() => flush()}>
+                    flush
                 </Button>
                 <Palette
                     onChange={(event, newValue) => this.handleChange(event,newValue)}

@@ -1,6 +1,9 @@
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
 import { createStore } from 'redux'
+import storage from 'redux-persist/lib/storage'
+import { persistStore, persistReducer } from 'redux-persist'
+
+const ADD = "ADD"
+const CHANGE = "CHANGE"
 
 let number = 0
 let conf = {
@@ -43,11 +46,11 @@ let initialState = {
     preview: preview,
 }
 
-function reducer(state = initialState, action){
+export function reducer(state = initialState, action){
     switch(action.type){
-        case "ADD":
+        case ADD:
             return addReduce(state, action)
-        case "CHANGE":
+        case CHANGE:
             return changeReduce(state, action)
         default:
             return state
@@ -78,7 +81,6 @@ function addReduce(state, action){
         backgroundColor: state.conf.backgroundColor.value
     }
     
-    //let newData = {...action.data}
     let newList = state.list.slice()
     newList.push(newData)
     return {
@@ -121,7 +123,7 @@ function changeReduce(state, action){
 
 export function change(event, newValue){
     return {
-        type: "CHANGE",
+        type: CHANGE,
         event: event,
         value: newValue,
     }
@@ -129,9 +131,29 @@ export function change(event, newValue){
 
 export function add(event){
     return {
-        type: "ADD",
+        type: ADD,
         event: event,
     }
 }
 
-export let store = createStore(reducer)
+const persistConfig = {
+    key: 'stamp-artist',
+    storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, reducer)
+
+export let store = createStore(persistedReducer)
+export let persistor = persistStore(store)
+
+export function purge(){
+    persistor.purge()
+}
+
+export function pause(){
+    persistor.pause()
+}
+
+export function flush(){
+    persistor.flush()
+}
