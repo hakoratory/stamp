@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 class Canvas extends React.Component{
     canvas_style = {
@@ -24,11 +25,12 @@ class Canvas extends React.Component{
     render(){
         return(
             <div id="canvas" style={this.canvas_style} onClick={this.props.onClick}>
-                {this.props.data.map((value) => this.stamp(value))}
+                {this.props.list.map((value) => this.stamp(value))}
             </div>
         )
     }
 }
 
+Canvas = connect((state) => state)(Canvas)
 export default Canvas
 
