@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
-import '../../Button.css'
+import '../../static/css/Button.css'
 
 function CustomButton(props){
     return(

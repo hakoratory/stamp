@@ -5,6 +5,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 const ADD = "ADD"
 const CHANGE = "CHANGE"
 const RESET = "RESET"
+const MODAL = "MODAL"
 
 let conf = {
     width: {
@@ -43,6 +44,7 @@ let initialState = {
     list: [],
     conf: conf,
     preview: getPreview(conf),
+    open: false,
 }
 
 export function getPreview(conf){
@@ -64,6 +66,8 @@ export function reducer(state = initialState, action){
             return changeReduce(state, action)
         case RESET:
             return resetReduce()
+        case MODAL:
+            return modalReduce(state)
         default:
             return state
 
@@ -88,6 +92,7 @@ function addReduce(state, action){
         list: newList,
         conf: state.conf,
         preview: state.preview,
+        open: state.open,
     }
 }
 
@@ -119,6 +124,7 @@ function changeReduce(state, action){
         list: state.list,
         conf: newConf,
         preview: newPreview,
+        open: state.open,
     }
 }
 
@@ -128,6 +134,16 @@ function resetReduce(){
         list: data,
         conf: conf,
         preview: getPreview(conf),
+        open: false,
+    }
+}
+
+function modalReduce(state){
+    return {
+        list: state.list,
+        conf: state.conf,
+        preview: state.preview,
+        open: !state.open,
     }
 }
 
@@ -150,6 +166,12 @@ export function change(event, newValue){
 export function reset(){
     return {
         type: RESET,
+    }
+}
+
+export function modal(){
+    return {
+        type: MODAL,
     }
 }
 

@@ -29,4 +29,4 @@ Part of this code was created with reference to the following book.
 
 ## notes
 
-1. <b><a id="note-1" href="#note_ref-1">^</a></b> If you press the stamp and resize the window, the stamp you press will retain its position.
+1. <b><a id="note-1" href="#note_ref-1">^</a></b> If you resize the window after pressing some stamps, these you press will retain its position.

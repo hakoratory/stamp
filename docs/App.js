@@ -1,10 +1,11 @@
 import React from 'react'
-import './App.css'
+import './static/css/App.css'
+import Header from './header/Header'
 import { Grid } from '@material-ui/core'
 import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
 import { connect } from 'react-redux'
-import { add, change, reset } from './redux/Store'
+import { add, change, reset, modal } from './redux/Store'
 
 class App extends React.Component { 
     constructor(props){
@@ -23,20 +24,17 @@ class App extends React.Component {
         switch(id){
             case "RESET":
             this.props.dispatch(reset())
-        }
-        
+        }        
     }
 
-    header_style = { 
-        backgroundColor: "#C0C0C0"
-    }
+    handleClickOpen = () => {
+        this.props.dispatch(modal())
+    };
 
     render(){
         return(
             <div>
-                <header style={this.header_style}>
-                    <h1>Stamp</h1>
-                </header>
+                <Header onClick={this.handleClickOpen}/>
                 <Grid container spacing={4}>
                     <Grid item md={6} sm={12} xs={12}>
                         <Canvas onClick={this.handleClick_canvas} />
