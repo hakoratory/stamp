@@ -24,7 +24,7 @@ class App extends React.Component {
         switch(id){
             case "RESET":
             this.props.dispatch(reset())
-        }        
+        }
     }
 
     handleClick_modal = () => {
