@@ -3,11 +3,11 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    index: './doc/index.js',
+    index: './src/index.js',
   },
   devtool: 'inline-source-map',
  devServer: {
-   contentBase: './dist',
+   contentBase: './',
  },
  module: {
      rules: [
