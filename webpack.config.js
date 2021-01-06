@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    index: './src/index.js',
+    index: './doc/index.js',
   },
   devtool: 'inline-source-map',
  devServer: {
