@@ -4,26 +4,26 @@ import { persistStore, persistReducer } from 'redux-persist'
 
 const ADD = "ADD"
 const CHANGE = "CHANGE"
+const RESET = "RESET"
 
-let number = 0
 let conf = {
     width: {
         id: "width",
         value: 50,
         step: 1,
-        max: 500,
+        max: 300,
     },
     height: {
         id: "height",
         value: 50,
         step: 1,
-        max: 500,
+        max: 300,
     },
     borderRadius: {
         id: "border radius",
         value: 10,
         step: 1,
-        max: 500,
+        max: 150,
     },
     opacity: {
         id: "opacity",
@@ -38,24 +38,11 @@ let conf = {
     },
 }
 
-let preview = getPreview(conf)
-
+//state
 let initialState = {
     list: [],
     conf: conf,
-    preview: preview,
-}
-
-export function reducer(state = initialState, action){
-    switch(action.type){
-        case ADD:
-            return addReduce(state, action)
-        case CHANGE:
-            return changeReduce(state, action)
-        default:
-            return state
-
-    }
+    preview: getPreview(conf),
 }
 
 export function getPreview(conf){
@@ -68,20 +55,34 @@ export function getPreview(conf){
     }
 }
 
-function addReduce(state, action){
+//reducer
+export function reducer(state = initialState, action){
+    switch(action.type){
+        case ADD:
+            return addReduce(state, action)
+        case CHANGE:
+            return changeReduce(state, action)
+        case RESET:
+            return resetReduce()
+        default:
+            return state
 
+    }
+}
+
+//actions
+function addReduce(state, action){
+    let newList = state.list.slice()
     let newData = {
         x: action.event.pageX,
         y: action.event.pageY,
-        number: number++,
+        number: newList.length,
         width: state.conf.width.value,
         height: state.conf.height.value,
         borderRadius: state.conf.borderRadius.value,
         opacity: state.conf.opacity.value,
         backgroundColor: state.conf.backgroundColor.value
     }
-    
-    let newList = state.list.slice()
     newList.push(newData)
     return {
         list: newList,
@@ -121,6 +122,23 @@ function changeReduce(state, action){
     }
 }
 
+function resetReduce(){
+    let data = []
+    return {
+        list: data,
+        conf: conf,
+        preview: getPreview(conf),
+    }
+}
+
+//action creators
+export function add(event){
+    return {
+        type: ADD,
+        event: event,
+    }
+}
+
 export function change(event, newValue){
     return {
         type: CHANGE,
@@ -129,13 +147,13 @@ export function change(event, newValue){
     }
 }
 
-export function add(event){
+export function reset(){
     return {
-        type: ADD,
-        event: event,
+        type: RESET,
     }
 }
 
+//redux persist
 const persistConfig = {
     key: 'stamp-artist',
     storage,
@@ -156,4 +174,8 @@ export function pause(){
 
 export function flush(){
     persistor.flush()
+}
+
+export function persist(){
+    persistor.persist()
 }

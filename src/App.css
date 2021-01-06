@@ -1,18 +1,35 @@
-body{
-    margin: 10px;
+body {
+    background-color: #C0C0C0;
 }
 
-h1{
+h1 {
     font-size: 32pt;
     font-weight: bold;
     text-align: left;
     letter-spacing: -2px;
-    color: #C0C0C0;
-    margin: -5px 0px;
+    color: #FFFFFF;
+    margin: 5px 20px;
 }
 
-p{
+h3 {
+    font-size: 12pt;
+    margin: 5px 0px;
+}
+
+p {
     margin: 0px;
     color: #666;
-    font-size: 16pt;
+    font-size: 12pt;
+}
+
+.palette_style {
+    margin: 10px;
+}
+
+.canvas_style {
+    width: 50vw;
+    height: calc(50vw / 1.4);
+    border: 2px solid #808080;
+    margin: 0 auto;
+    background-color: #FFFFFF;
 }

@@ -2,12 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 class Canvas extends React.Component{
-    canvas_style = {
-        width: "98%",
-        height: "500px",
-        border: "2px solid #808080",
-        margin: "0 auto 20px",
-    }
 
     stamp(stamp_data){
         let style = {
@@ -24,7 +18,7 @@ class Canvas extends React.Component{
     }
     render(){
         return(
-            <div id="canvas" style={this.canvas_style} onClick={this.props.onClick}>
+            <div id="canvas" className="canvas_style" onClick={this.props.onClick}>
                 {this.props.list.map((value) => this.stamp(value))}
             </div>
         )
@@ -33,4 +27,3 @@ class Canvas extends React.Component{
 
 Canvas = connect((state) => state)(Canvas)
 export default Canvas
-

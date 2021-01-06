@@ -4,12 +4,9 @@ import { HuePicker } from 'react-color'
 import CustomSlider from './slider/CustomSlider'
 import Preview from './preview/Preview'
 import { connect } from 'react-redux'
+import CustomButton from './button/CustomButton'
 
 class Palette extends React.Component {
-
-    palette_style = {
-        marginBottom: "10px"
-    }
 
     handleChangeColor = (color) => {
         let event = {
@@ -22,9 +19,9 @@ class Palette extends React.Component {
 
     render(){
         return (
-            <div style={this.palette_style}>
-                <Grid container spacing={6} alignItems="center" justify="center">
-                    <Grid item xs={6}>
+            <div className="palette_style">
+                <Grid container spacing={5} alignItems="center" justify="center">
+                    <Grid item md={4} sm={6} xs={10}>
                         <Grid item xs={12}>
                             <CustomSlider
                                 id={this.props.conf.width.id}
@@ -69,8 +66,11 @@ class Palette extends React.Component {
                                 width={this.props.conf.backgroundColor.width}
                                 />
                         </Grid>
+                        <Grid item xs={12}>
+                            <CustomButton id="RESET" onClick={this.props.onClick}/>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item md={8} sm={6} xs={12}>
                         <Grid container spacing={6} alignItems="center" justify="center">
                             <Preview preview={this.props.preview}/>
                         </Grid>

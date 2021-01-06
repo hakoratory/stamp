@@ -1,11 +1,10 @@
 import React from 'react'
 import './App.css'
-import { Divider,Button } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
-import html2canvas from 'html2canvas'
 import { connect } from 'react-redux'
-import { add, change, purge, pause, flush } from './redux/Store'
+import { add, change, reset } from './redux/Store'
 
 class App extends React.Component { 
     constructor(props){
@@ -16,37 +15,39 @@ class App extends React.Component {
         this.props.dispatch(change(event, newValue))
     }
 
-    handleClick = (event) => {
+    handleClick_canvas = (event) => {
         this.props.dispatch(add(event))
     }
 
-    createImage(){
-        html2canvas(document.querySelector('#canvas')).then(canvas => {
-            document.body.appendChild(canvas)
-        })
+    handleClick_button = (event, id) => {
+        switch(id){
+            case "RESET":
+            this.props.dispatch(reset())
+        }
+        
+    }
+
+    header_style = { 
+        backgroundColor: "#C0C0C0"
     }
 
     render(){
         return(
             <div>
-                <h1>Stamp artist</h1>
-                <Canvas onClick={this.handleClick} />
-                <Divider variant="middle" />
-                <Button variant="contained" color="primary" onClick={() => this.createImage()}>
-                    create img
-                </Button>
-                <Button variant="contained" color="primary" onClick={() => purge()}>
-                    purge
-                </Button>
-                <Button variant="contained" color="primary" onClick={() => pause()}>
-                    pause
-                </Button>
-                <Button variant="contained" color="primary" onClick={() => flush()}>
-                    flush
-                </Button>
-                <Palette
-                    onChange={(event, newValue) => this.handleChange(event,newValue)}
-                    />
+                <header style={this.header_style}>
+                    <h1>Stamp</h1>
+                </header>
+                <Grid container spacing={4}>
+                    <Grid item md={6} sm={12} xs={12}>
+                        <Canvas onClick={this.handleClick_canvas} />
+                    </Grid>
+                    <Grid item md={6} sm={12} xs={12}>
+                        <Palette
+                            onChange={(event, newValue) => this.handleChange(event,newValue)}
+                            onClick={this.handleClick_button}
+                            />
+                    </Grid>
+                </Grid>
             </div>
         )
     }
