@@ -27,14 +27,14 @@ class App extends React.Component {
         }        
     }
 
-    handleClickOpen = () => {
+    handleClick_modal = () => {
         this.props.dispatch(modal())
     };
 
     render(){
         return(
             <div>
-                <Header onClick={this.handleClickOpen}/>
+                <Header onClick={this.handleClick_modal}/>
                 <Grid container spacing={4}>
                     <Grid item md={6} sm={12} xs={12}>
                         <Canvas onClick={this.handleClick_canvas} />
