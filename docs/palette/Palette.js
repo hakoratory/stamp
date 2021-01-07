@@ -8,13 +8,13 @@ import CustomButton from './button/CustomButton'
 
 class Palette extends React.Component {
 
-    handleChangeColor = (color) => {
+    handleChangeBackgroundColor = (color) => {
         let event = {
             target: {
                 id: this.props.conf.backgroundColor.id,
             }
         }
-        this.props.onChange_color(event, color.hex)
+        this.props.onChange_backgroundColor(event, color.hex)
     }
 
     render(){
@@ -62,7 +62,7 @@ class Palette extends React.Component {
                             <h3>{this.props.conf.backgroundColor.id}: {this.props.conf.backgroundColor.value}</h3>
                             <HuePicker
                                 color={this.props.conf.backgroundColor.value}
-                                onChange={this.handleChangeColor}
+                                onChange={this.handleChangeBackgroundColor}
                                 width={this.props.conf.backgroundColor.width}
                                 />
                         </Grid>

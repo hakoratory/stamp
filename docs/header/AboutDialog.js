@@ -24,7 +24,7 @@ class AboutDialog extends React.Component {
                     <br/>
                     Version
                     <br/>
-                    1.0.0
+                    1.1
                     <br/>
                     <br/>
                     How to stamp

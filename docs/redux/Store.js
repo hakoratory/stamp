@@ -7,7 +7,7 @@ const CHANGE_WIDTH = "CHANGE_WIDTH"
 const CHANGE_HEIGHT = "CHANGE_HEIGHT"
 const CHANGE_BORDER_RADIUS = "CHANGE_BORDER_RADIUS"
 const CHANGE_OPACITY = "CHANGE_OPACITY"
-const CHANGE_COLOR = "CHANGE_COLOR"
+const CHANGE_BACKGROUND_COLOR = "CHANGE_BACKGROUND_COLOR"
 const RESET = "RESET"
 const MODAL = "MODAL"
 
@@ -74,8 +74,8 @@ export function reducer(state = initialState, action){
             return changeBorderRadiusReduce(state, action)
         case CHANGE_OPACITY:
             return changeOpacityReduce(state, action)
-        case CHANGE_COLOR:
-            return changeColorReduce(state, action)
+        case CHANGE_BACKGROUND_COLOR:
+            return changeBackgroundColorReduce(state, action)
         case RESET:
             return resetReduce()
         case MODAL:
@@ -164,7 +164,7 @@ function changeOpacityReduce(state, action){
     }
 }
 
-function changeColorReduce(state, action){
+function changeBackgroundColorReduce(state, action){
     let newConf = {...state.conf}
     newConf.backgroundColor.value = action.value
 
@@ -234,9 +234,9 @@ export function changeOpacity(event, newValue){
         value: newValue,
     }
 }
-export function changeColor(event, newValue){
+export function changeBackgroundColor(event, newValue){
     return {
-        type: CHANGE_COLOR,
+        type: CHANGE_BACKGROUND_COLOR,
         event: event,
         value: newValue,
     }
