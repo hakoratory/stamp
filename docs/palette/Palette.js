@@ -14,7 +14,7 @@ class Palette extends React.Component {
                 id: this.props.conf.backgroundColor.id,
             }
         }
-        this.props.onChange(event, color.hex)
+        this.props.onChange_color(event, color.hex)
     }
 
     render(){
@@ -28,7 +28,7 @@ class Palette extends React.Component {
                                 step={this.props.conf.width.step}
                                 max={this.props.conf.width.max}
                                 value={this.props.conf.width.value}
-                                onChange={this.props.onChange}
+                                onChange={this.props.onChange_width}
                                 />
                         </Grid>
                         <Grid item xs={12}>
@@ -37,7 +37,7 @@ class Palette extends React.Component {
                                 step={this.props.conf.height.step}
                                 max={this.props.conf.height.max}
                                 value={this.props.conf.height.value}
-                                onChange={this.props.onChange}
+                                onChange={this.props.onChange_height}
                                 />
                         </Grid>
                         <Grid item xs={12}>
@@ -46,7 +46,7 @@ class Palette extends React.Component {
                                 step={this.props.conf.borderRadius.step}
                                 max={this.props.conf.borderRadius.max}
                                 value={this.props.conf.borderRadius.value}
-                                onChange={this.props.onChange}
+                                onChange={this.props.onChange_borderRadius}
                                 />
                         </Grid>
                         <Grid item xs={12}>
@@ -55,7 +55,7 @@ class Palette extends React.Component {
                                 step={this.props.conf.opacity.step}
                                 max={this.props.conf.opacity.max}
                                 value={this.props.conf.opacity.value}
-                                onChange={this.props.onChange}
+                                onChange={this.props.onChange_opacity}
                                 />
                         </Grid>
                         <Grid item xs={12}>

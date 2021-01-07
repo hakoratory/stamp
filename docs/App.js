@@ -12,26 +12,24 @@ class App extends React.Component {
         super(props)
     }
 
-    handleChange = (event, newValue) => {
-        switch(event.target.id){
-            case "width":
-                this.props.dispatch(changeWidth(event, newValue))
-                break
-            case "height":
-                this.props.dispatch(changeHeight(event, newValue))
-                break
-            case "border radius":
-                this.props.dispatch(changeBorderRadius(event, newValue))
-                break
-            case "opacity":
-                this.props.dispatch(changeOpacity(event, newValue))
-                break
-            case "background color":
-                this.props.dispatch(changeColor(event, newValue))
-                break
-            default:
+    handleChange_width = (event, newValue) => {
+        this.props.dispatch(changeWidth(event, newValue))
+    }
 
-        }
+    handleChange_height = (event, newValue) => {
+        this.props.dispatch(changeHeight(event, newValue))
+    }
+
+    handleChange_borderRadius = (event, newValue) => {
+        this.props.dispatch(changeBorderRadius(event, newValue))
+    }
+
+    handleChange_opacity = (event, newValue) => {
+        this.props.dispatch(changeOpacity(event, newValue))
+    }
+
+    handleChange_color = (event, newValue) => {
+        this.props.dispatch(changeColor(event, newValue))
     }
 
     handleClick_canvas = (event) => {
@@ -59,7 +57,11 @@ class App extends React.Component {
                     </Grid>
                     <Grid item md={6} sm={12} xs={12}>
                         <Palette
-                            onChange={(event, newValue) => this.handleChange(event,newValue)}
+                            onChange_width={(event, newValue) => this.handleChange_width(event,newValue)}
+                            onChange_height={(event, newValue) => this.handleChange_height(event,newValue)}
+                            onChange_borderRadius={(event, newValue) => this.handleChange_borderRadius(event,newValue)}
+                            onChange_opacity={(event, newValue) => this.handleChange_opacity(event,newValue)}
+                            onChange_color={(event, newValue) => this.handleChange_color(event,newValue)}
                             onClick={this.handleClick_button}
                             />
                     </Grid>
