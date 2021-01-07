@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core'
 import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
 import { connect } from 'react-redux'
-import { add, change, reset, modal } from './redux/Store'
+import { add, changeWidth, changeHeight, changeBorderRadius, changeOpacity, changeColor, reset, modal } from './redux/Store'
 
 class App extends React.Component { 
     constructor(props){
@@ -13,7 +13,25 @@ class App extends React.Component {
     }
 
     handleChange = (event, newValue) => {
-        this.props.dispatch(change(event, newValue))
+        switch(event.target.id){
+            case "width":
+                this.props.dispatch(changeWidth(event, newValue))
+                break
+            case "height":
+                this.props.dispatch(changeHeight(event, newValue))
+                break
+            case "border radius":
+                this.props.dispatch(changeBorderRadius(event, newValue))
+                break
+            case "opacity":
+                this.props.dispatch(changeOpacity(event, newValue))
+                break
+            case "background color":
+                this.props.dispatch(changeColor(event, newValue))
+                break
+            default:
+
+        }
     }
 
     handleClick_canvas = (event) => {

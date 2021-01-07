@@ -3,7 +3,11 @@ import storage from 'redux-persist/lib/storage'
 import { persistStore, persistReducer } from 'redux-persist'
 
 const ADD = "ADD"
-const CHANGE = "CHANGE"
+const CHANGE_WIDTH = "CHANGE_WIDTH"
+const CHANGE_HEIGHT = "CHANGE_HEIGHT"
+const CHANGE_BORDER_RADIUS = "CHANGE_BORDER_RADIUS"
+const CHANGE_OPACITY = "CHANGE_OPACITY"
+const CHANGE_COLOR = "CHANGE_COLOR"
 const RESET = "RESET"
 const MODAL = "MODAL"
 
@@ -62,8 +66,16 @@ export function reducer(state = initialState, action){
     switch(action.type){
         case ADD:
             return addReduce(state, action)
-        case CHANGE:
-            return changeReduce(state, action)
+        case CHANGE_WIDTH:
+            return changeWidthReduce(state, action)
+        case CHANGE_HEIGHT:
+            return changeHeightReduce(state, action)
+        case CHANGE_BORDER_RADIUS:
+            return changeBorderRadiusReduce(state, action)
+        case CHANGE_OPACITY:
+            return changeOpacityReduce(state, action)
+        case CHANGE_COLOR:
+            return changeColorReduce(state, action)
         case RESET:
             return resetReduce()
         case MODAL:
@@ -96,27 +108,65 @@ function addReduce(state, action){
     }
 }
 
-function changeReduce(state, action){
+function changeWidthReduce(state, action){
     let newConf = {...state.conf}
-    switch(action.event.target.id){
-        case state.conf.width.id:
-            newConf.width.value = action.value
-            break
-        case state.conf.height.id:
-            newConf.height.value = action.value
-            break
-        case state.conf.borderRadius.id:
-            newConf.borderRadius.value = action.value
-            break
-        case state.conf.opacity.id:
-            newConf.opacity.value = action.value
-            break
-        case state.conf.backgroundColor.id:
-            newConf.backgroundColor.value = action.value
-            break
-        default:
+    newConf.width.value = action.value
 
+    let newPreview = {...getPreview(newConf)}
+
+    return {
+        list: state.list,
+        conf: newConf,
+        preview: newPreview,
+        open: state.open,
     }
+}
+
+function changeHeightReduce(state, action){
+    let newConf = {...state.conf}
+    newConf.height.value = action.value
+
+    let newPreview = {...getPreview(newConf)}
+
+    return {
+        list: state.list,
+        conf: newConf,
+        preview: newPreview,
+        open: state.open,
+    }
+}
+
+function changeBorderRadiusReduce(state, action){
+    let newConf = {...state.conf}
+    newConf.borderRadius.value = action.value
+
+    let newPreview = {...getPreview(newConf)}
+
+    return {
+        list: state.list,
+        conf: newConf,
+        preview: newPreview,
+        open: state.open,
+    }
+}
+
+function changeOpacityReduce(state, action){
+    let newConf = {...state.conf}
+    newConf.opacity.value = action.value
+
+    let newPreview = {...getPreview(newConf)}
+
+    return {
+        list: state.list,
+        conf: newConf,
+        preview: newPreview,
+        open: state.open,
+    }
+}
+
+function changeColorReduce(state, action){
+    let newConf = {...state.conf}
+    newConf.backgroundColor.value = action.value
 
     let newPreview = {...getPreview(newConf)}
 
@@ -155,14 +205,42 @@ export function add(event){
     }
 }
 
-export function change(event, newValue){
+export function changeWidth(event, newValue){
     return {
-        type: CHANGE,
+        type: CHANGE_WIDTH,
         event: event,
         value: newValue,
     }
 }
 
+export function changeHeight(event, newValue){
+    return {
+        type: CHANGE_HEIGHT,
+        event: event,
+        value: newValue,
+    }
+}
+export function changeBorderRadius(event, newValue){
+    return {
+        type: CHANGE_BORDER_RADIUS,
+        event: event,
+        value: newValue,
+    }
+}
+export function changeOpacity(event, newValue){
+    return {
+        type: CHANGE_OPACITY,
+        event: event,
+        value: newValue,
+    }
+}
+export function changeColor(event, newValue){
+    return {
+        type: CHANGE_COLOR,
+        event: event,
+        value: newValue,
+    }
+}
 export function reset(){
     return {
         type: RESET,
