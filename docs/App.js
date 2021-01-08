@@ -51,11 +51,11 @@ class App extends React.Component {
         return(
             <div>
                 <Header onClick={this.handleClick_modal}/>
-                <Grid container spacing={4}>
-                    <Grid item md={6} sm={12} xs={12}>
+                <Grid container spacing={6}>
+                    <Grid item md={7} sm={12} xs={12}>
                         <Canvas onClick={this.handleClick_canvas} />
                     </Grid>
-                    <Grid item md={6} sm={12} xs={12}>
+                    <Grid item md={5} sm={12} xs={12}>
                         <Palette
                             onChange_width={(event, newValue) => this.handleChange_width(event,newValue)}
                             onChange_height={(event, newValue) => this.handleChange_height(event,newValue)}

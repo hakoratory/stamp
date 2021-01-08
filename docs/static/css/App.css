@@ -15,10 +15,10 @@ h1 {
     margin: 5px 20px;
 }
 
-h3 {
+/* h3 {
     font-size: 12pt;
     margin: 5px 0px;
-}
+} */
 
 p {
     margin: 0px;
@@ -31,9 +31,14 @@ p {
 }
 
 .canvas_style {
-    width: 50vw;
-    height: calc(50vw / 1.4);
+    width: 60vw;
+    height: calc(60vw / 1.4);
     border: 2px solid #808080;
     margin: 0 auto;
     background-color: #FFFFFF;
+}
+
+.padding {
+    padding-left: 16px;
+    padding-right: 16px;
 }

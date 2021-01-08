@@ -1,17 +1,25 @@
 import React from 'react'
-import { Slider } from '@material-ui/core'
+import { Grid, Typography, Slider } from '@material-ui/core'
 
 function CustomSlider(props){
     return(
         <div>
-            <h3>{props.id}: {props.value}</h3>
-            <Slider
-                id={props.id}
-                step={props.step}
-                max={props.max}
-                onChange={props.onChange}
-                value={props.value}
-                />
+            <Grid container spacing={2}>
+                <Grid item>
+                    <Typography variant="subtitle1">
+                        {props.id}: {props.value}
+                    </Typography>
+                </Grid>
+                <Grid item xs>
+                <Slider
+                    id={props.id}
+                    step={props.step}
+                    max={props.max}
+                    onChange={props.onChange}
+                    value={props.value}
+                    />
+                </Grid>
+            </Grid>
         </div>
     )
 }
