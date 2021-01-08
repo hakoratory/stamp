@@ -61,6 +61,10 @@ export function getPreview(conf){
     }
 }
 
+function copy(source){
+    return JSON.parse(JSON.stringify(source))
+}
+
 //reducer
 export function reducer(state = initialState, action){
     switch(action.type){
@@ -109,9 +113,8 @@ function addReduce(state, action){
 }
 
 function changeWidthReduce(state, action){
-    let newConf = {...state.conf}
+    let newConf = copy(state.conf)
     newConf.width.value = action.value
-
     let newPreview = {...getPreview(newConf)}
 
     return {
@@ -123,7 +126,7 @@ function changeWidthReduce(state, action){
 }
 
 function changeHeightReduce(state, action){
-    let newConf = {...state.conf}
+    let newConf = copy(state.conf)
     newConf.height.value = action.value
 
     let newPreview = {...getPreview(newConf)}
@@ -137,7 +140,7 @@ function changeHeightReduce(state, action){
 }
 
 function changeBorderRadiusReduce(state, action){
-    let newConf = {...state.conf}
+    let newConf = copy(state.conf)
     newConf.borderRadius.value = action.value
 
     let newPreview = {...getPreview(newConf)}
@@ -151,7 +154,7 @@ function changeBorderRadiusReduce(state, action){
 }
 
 function changeOpacityReduce(state, action){
-    let newConf = {...state.conf}
+    let newConf = copy(state.conf)
     newConf.opacity.value = action.value
 
     let newPreview = {...getPreview(newConf)}
@@ -165,7 +168,7 @@ function changeOpacityReduce(state, action){
 }
 
 function changeBackgroundColorReduce(state, action){
-    let newConf = {...state.conf}
+    let newConf = copy(state.conf)
     newConf.backgroundColor.value = action.value
 
     let newPreview = {...getPreview(newConf)}
