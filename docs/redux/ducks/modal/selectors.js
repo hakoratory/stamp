@@ -1,0 +1,1 @@
+export const selectOpen = state => state.modal.open

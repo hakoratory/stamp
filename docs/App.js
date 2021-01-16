@@ -4,72 +4,80 @@ import Header from './header/Header'
 import { Grid } from '@material-ui/core'
 import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
-import { connect } from 'react-redux'
-import { add, changeWidth, changeHeight, changeBorderRadius, changeOpacity, changeBackgroundColor, reset, modal } from './redux/Store'
+import {
+    add,
+    reset,
+} from './redux/ducks/stamp/list/slice'
+import {
+    changeWidth,
+    changeHeight,
+    changeBorderRadius,
+    changeOpacity,
+    changeBackgroundColor,
+} from './redux/ducks/stamp/conf/slice'
+import { modal } from './redux/ducks/modal/slice'
+import { useDispatch, useSelector } from 'react-redux'
+import * as selectors from './redux/rootSelectors'
 
-class App extends React.Component { 
-    constructor(props){
-        super(props)
+function App(){ 
+    const dispatch = useDispatch()
+    const currentConf = useSelector(selectors.confSelectors.selectConf)
+
+    const handleChange_width = (event, newValue) => {
+        dispatch(changeWidth({value: newValue}))
     }
 
-    handleChange_width = (event, newValue) => {
-        this.props.dispatch(changeWidth(event, newValue))
+    const handleChange_height = (event, newValue) => {
+        dispatch(changeHeight({value: newValue}))
     }
 
-    handleChange_height = (event, newValue) => {
-        this.props.dispatch(changeHeight(event, newValue))
+    const handleChange_borderRadius = (event, newValue) => {
+        dispatch(changeBorderRadius({value: newValue}))
     }
 
-    handleChange_borderRadius = (event, newValue) => {
-        this.props.dispatch(changeBorderRadius(event, newValue))
+    const handleChange_opacity = (event, newValue) => {
+        dispatch(changeOpacity({value: newValue}))
     }
 
-    handleChange_opacity = (event, newValue) => {
-        this.props.dispatch(changeOpacity(event, newValue))
+    const handleChange_backgroundColor = (event, newValue) => {
+        dispatch(changeBackgroundColor({value: newValue}))
     }
 
-    handleChange_backgroundColor = (event, newValue) => {
-        this.props.dispatch(changeBackgroundColor(event, newValue))
+    const handleClick_canvas = (event) => {
+        dispatch(add({x: event.pageX, y: event.pageY, currentConf: currentConf}))
     }
 
-    handleClick_canvas = (event) => {
-        this.props.dispatch(add(event))
-    }
-
-    handleClick_button = (event, id) => {
+    const handleClick_button = (event, id) => {
         switch(id){
             case "RESET":
-            this.props.dispatch(reset())
+            dispatch(reset())
         }
     }
 
-    handleClick_modal = () => {
-        this.props.dispatch(modal())
+    const handleClick_modal = () => {
+        dispatch(modal())
     };
 
-    render(){
-        return(
-            <div>
-                <Header onClick={this.handleClick_modal}/>
-                <Grid container spacing={6}>
-                    <Grid item md={7} sm={12} xs={12}>
-                        <Canvas onClick={this.handleClick_canvas} />
-                    </Grid>
-                    <Grid item md={5} sm={12} xs={12}>
-                        <Palette
-                            onChange_width={(event, newValue) => this.handleChange_width(event,newValue)}
-                            onChange_height={(event, newValue) => this.handleChange_height(event,newValue)}
-                            onChange_borderRadius={(event, newValue) => this.handleChange_borderRadius(event,newValue)}
-                            onChange_opacity={(event, newValue) => this.handleChange_opacity(event,newValue)}
-                            onChange_backgroundColor={(event, newValue) => this.handleChange_backgroundColor(event,newValue)}
-                            onClick={this.handleClick_button}
-                            />
-                    </Grid>
+    return(
+        <div>
+            <Header onClick={handleClick_modal}/>
+            <Grid container spacing={6}>
+                <Grid item md={7} sm={12} xs={12}>
+                    <Canvas onClick={handleClick_canvas} />
                 </Grid>
-            </div>
-        )
-    }
+                <Grid item md={5} sm={12} xs={12}>
+                    <Palette
+                        onChange_width={(event, newValue) => handleChange_width(event,newValue)}
+                        onChange_height={(event, newValue) => handleChange_height(event,newValue)}
+                        onChange_borderRadius={(event, newValue) => handleChange_borderRadius(event,newValue)}
+                        onChange_opacity={(event, newValue) => handleChange_opacity(event,newValue)}
+                        onChange_backgroundColor={(event, newValue) => handleChange_backgroundColor(event,newValue)}
+                        onClick={handleClick_button}
+                        />
+                </Grid>
+            </Grid>
+        </div>
+    )
 }
 
-App = connect((state) => state)(App)
 export default App

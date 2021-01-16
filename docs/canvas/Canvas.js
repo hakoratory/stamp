@@ -1,9 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
+import * as selectors from '../redux/rootSelectors'
 
-class Canvas extends React.Component{
+export default function Canvas(props){
 
-    stamp(stamp_data){
+    const stampList = useSelector(selectors.listSelectors.selectList)
+
+    function stamp(stamp_data){
         let style = {
             position: "absolute",
             left: (stamp_data.x - stamp_data.width/2) + "px",
@@ -16,14 +19,10 @@ class Canvas extends React.Component{
         }
         return <div style={style} key={stamp_data.number}></div>
     }
-    render(){
-        return(
-            <div id="canvas" className="canvas_style" onClick={this.props.onClick}>
-                {this.props.list.map((value) => this.stamp(value))}
-            </div>
-        )
-    }
+    
+    return(
+        <div id="canvas" className="canvas_style" onClick={props.onClick}>
+            {stampList.map((value) => stamp(value))}
+        </div>
+    )
 }
-
-Canvas = connect((state) => state)(Canvas)
-export default Canvas
