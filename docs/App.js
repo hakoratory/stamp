@@ -1,7 +1,7 @@
 import React, { Fragment} from 'react'
 import './static/css/App.css'
 import Header from './header/Header'
-import { Grid, makeStyles } from '@material-ui/core'
+import { Box, Container, Grid, makeStyles } from '@material-ui/core'
 import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
 import {
@@ -29,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         [theme.breakpoints.down('md')]: {
             width: "90%",
-            height: "calc(60vw / 1.6)",
+            height: "50vh",
         },
         [theme.breakpoints.down('sm')]: {
             width: "90%",
@@ -92,24 +92,24 @@ function App(){
     }
 
     return(
-        <Fragment>
-            <Header onClick={handleClick_modal}/>
-            <Grid container spacing={4}>
-                <Grid item lg={8} xs={12}>
-                    <Canvas onClick={handleClick_canvas} />
+        <Container maxWidth="98%">
+                <Header onClick={handleClick_modal}/>
+                <Grid container spacing={4}>
+                    <Grid item lg={9} xs={12}>
+                        <Canvas onClick={handleClick_canvas} />
+                    </Grid>
+                    <Grid item lg={3} xs={12}>
+                        <Palette
+                            onChange_width={(event, newValue) => handleChange_width(event,newValue)}
+                            onChange_height={(event, newValue) => handleChange_height(event,newValue)}
+                            onChange_borderRadius={(event, newValue) => handleChange_borderRadius(event,newValue)}
+                            onChange_opacity={(event, newValue) => handleChange_opacity(event,newValue)}
+                            onChange_backgroundColor={(event, newValue) => handleChange_backgroundColor(event,newValue)}
+                            onClick={handleClick_button}
+                            />
+                    </Grid>
                 </Grid>
-                <Grid item lg={4} xs={12}>
-                    <Palette
-                        onChange_width={(event, newValue) => handleChange_width(event,newValue)}
-                        onChange_height={(event, newValue) => handleChange_height(event,newValue)}
-                        onChange_borderRadius={(event, newValue) => handleChange_borderRadius(event,newValue)}
-                        onChange_opacity={(event, newValue) => handleChange_opacity(event,newValue)}
-                        onChange_backgroundColor={(event, newValue) => handleChange_backgroundColor(event,newValue)}
-                        onClick={handleClick_button}
-                        />
-                </Grid>
-            </Grid>
-        </Fragment>
+        </Container>
     )
 }
 
