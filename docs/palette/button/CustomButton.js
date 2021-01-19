@@ -1,14 +1,13 @@
 import React from 'react'
-import { Button } from '@material-ui/core'
-import '../../static/css/Button.css'
+import { Box, Button } from '@material-ui/core'
 
 function CustomButton(props){
     return(
-        <div className="button_group">
+        <Box p={1}>
             <Button variant="contained" color="primary" onClick={(event) => props.onClick(event, props.id)}>
                 {props.id}
             </Button>
-        </div>
+        </Box>
     )
 }
 

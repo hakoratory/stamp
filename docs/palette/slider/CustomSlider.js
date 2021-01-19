@@ -1,13 +1,13 @@
-import React from 'react'
-import { Grid, Typography, Slider } from '@material-ui/core'
+import React, { Fragment } from 'react'
+import { Grid, Typography, Slider, Box } from '@material-ui/core'
 
 function CustomSlider(props){
     return(
-        <div>
+        <Fragment>
             <Grid container spacing={2}>
                 <Grid item>
                     <Typography variant="subtitle1">
-                        {props.id}: {props.value}
+                        {props.displayName}
                     </Typography>
                 </Grid>
                 <Grid item xs>
@@ -19,8 +19,15 @@ function CustomSlider(props){
                     value={props.value}
                     />
                 </Grid>
+                <Grid item xs={2}>
+                    <Typography variant="subtitle1">
+                        <Box textAlign="right">
+                            {props.value}/{props.max}
+                        </Box>
+                    </Typography>
+                </Grid>
             </Grid>
-        </div>
+        </Fragment>
     )
 }
 

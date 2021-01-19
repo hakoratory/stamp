@@ -4,30 +4,27 @@ import { reset } from '../list/slice'
 const initialConf = {
     width: {
         id: "width",
+        displayName: "W",
         value: 50,
-        step: 1,
-        max: 300,
     },
     height: {
         id: "height",
+        displayName: "H",
         value: 50,
-        step: 1,
-        max: 300,
     },
     borderRadius: {
         id: "border radius",
+        displayName: "R",
         value: 10,
-        step: 1,
-        max: 150,
     },
     opacity: {
         id: "opacity",
+        displayName: "O",
         value: 0.1,
-        step: 0.1,
-        max: 1,
     },
     backgroundColor: {
         id: "background color",
+        displayName: "C",
         value: "#ff8300",
         width: "100%"
     },

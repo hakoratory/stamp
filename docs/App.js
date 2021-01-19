@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Fragment} from 'react'
 import './static/css/App.css'
 import Header from './header/Header'
-import { Grid } from '@material-ui/core'
+import { Grid, makeStyles } from '@material-ui/core'
 import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
 import {
@@ -19,7 +19,40 @@ import { modal } from './redux/ducks/modal/slice'
 import { useDispatch, useSelector } from 'react-redux'
 import * as selectors from './redux/rootSelectors'
 
-function App(){ 
+export const useStyles = makeStyles((theme) => ({
+    canvas: {
+        border: "2px solid #808080",
+        backgroundColor: "#FFFFFF",
+        [theme.breakpoints.up('lg')]: {
+            width: "70vw",
+            height: "calc(70vw / 1.6)",
+        },
+        [theme.breakpoints.down('md')]: {
+            width: "90%",
+            height: "calc(60vw / 1.6)",
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: "90%",
+            height: "55vh",
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: "90%",
+            height: "40vh",
+        },
+    },
+    preview: {
+        [theme.breakpoints.up('md')]: {
+            width: "320px",
+            height: "320px",
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: "170px",
+            height: "170px",
+        },
+    }
+}))
+
+function App(){
     const dispatch = useDispatch()
     const currentConf = useSelector(selectors.confSelectors.selectConf)
 
@@ -56,16 +89,16 @@ function App(){
 
     const handleClick_modal = () => {
         dispatch(modal())
-    };
+    }
 
     return(
-        <div>
+        <Fragment>
             <Header onClick={handleClick_modal}/>
-            <Grid container spacing={6}>
-                <Grid item md={7} sm={12} xs={12}>
+            <Grid container spacing={4}>
+                <Grid item lg={8} xs={12}>
                     <Canvas onClick={handleClick_canvas} />
                 </Grid>
-                <Grid item md={5} sm={12} xs={12}>
+                <Grid item lg={4} xs={12}>
                     <Palette
                         onChange_width={(event, newValue) => handleChange_width(event,newValue)}
                         onChange_height={(event, newValue) => handleChange_height(event,newValue)}
@@ -76,7 +109,7 @@ function App(){
                         />
                 </Grid>
             </Grid>
-        </div>
+        </Fragment>
     )
 }
 

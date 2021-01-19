@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import { useSelector } from 'react-redux'
 import * as selectors from '../redux/rootSelectors'
+import { useStyles } from '../App'
+import { Box } from '@material-ui/core'
 
 export default function Canvas(props){
-
+    const classes = useStyles()
     const stampList = useSelector(selectors.listSelectors.selectList)
 
     function stamp(stamp_data){
@@ -17,12 +19,16 @@ export default function Canvas(props){
             backgroundColor: stamp_data.backgroundColor,
             opacity: stamp_data.opacity,
         }
-        return <div style={style} key={stamp_data.number}></div>
+        return <Box style={style} key={stamp_data.number}></Box>
     }
-    
+
     return(
-        <div id="canvas" className="canvas_style" onClick={props.onClick}>
-            {stampList.map((value) => stamp(value))}
-        </div>
+        <Fragment>
+            <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+                <Box id="canvas" className={classes.canvas} onClick={props.onClick}>
+                    {stampList.map((value) => stamp(value))}
+                </Box>
+            </Box>
+        </Fragment>
     )
 }
