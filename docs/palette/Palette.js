@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Grid, Typography, useTheme, useMediaQuery } from '@material-ui/core'
+import { Box, Grid, Typography, useTheme, useMediaQuery } from '@material-ui/core'
 import { HuePicker } from 'react-color'
 import CustomSlider from './slider/CustomSlider'
 import Preview from './preview/Preview'
@@ -32,7 +32,7 @@ export default function Palette(props){
     },[matches])
     
     return (
-        <Grid container spacing={4} alignItems="center" justify="center">
+        <Grid container spacing={3} alignItems="center" justify="center">
             <Grid item lg={12} md={5} sm={4} xs={12}>
                 <Preview />
             </Grid>
@@ -81,7 +81,7 @@ export default function Palette(props){
                     <Grid item xs={12} className="padding">
                         <Grid container spacing={2} alignItems="center">
                             <Grid item>
-                                <Typography variant="subtitle1">
+                                <Typography variant="subtitle2">
                                     {conf.backgroundColor.displayName}
                                 </Typography>
                             </Grid>
@@ -95,7 +95,10 @@ export default function Palette(props){
                         </Grid>
                     </Grid>
                     <Grid item xs={12} className="padding">
-                        <CustomButton id="RESET" onClick={props.onClick}/>
+                        <Box display="flex" flexDirection="row">
+                            <CustomButton id="RESET" onClick={props.onClick}/>
+                            <CustomButton id="BACK" onClick={props.onClick}/>
+                        </Box>
                     </Grid>
                 </Grid>
             </Grid>

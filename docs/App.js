@@ -1,12 +1,13 @@
-import React, { Fragment} from 'react'
+import React from 'react'
 import './static/css/App.css'
 import Header from './header/Header'
-import { Box, Container, Grid, makeStyles } from '@material-ui/core'
+import { Container, Grid, makeStyles } from '@material-ui/core'
 import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
 import {
     add,
     reset,
+    back,
 } from './redux/ducks/stamp/list/slice'
 import {
     changeWidth,
@@ -24,8 +25,8 @@ export const useStyles = makeStyles((theme) => ({
         border: "2px solid #808080",
         backgroundColor: "#FFFFFF",
         [theme.breakpoints.up('lg')]: {
-            width: "70vw",
-            height: "calc(70vw / 1.6)",
+            width: "60vw",
+            height: "calc(60vw / 1.6)",
         },
         [theme.breakpoints.down('md')]: {
             width: "90%",
@@ -83,7 +84,12 @@ function App(){
     const handleClick_button = (event, id) => {
         switch(id){
             case "RESET":
-            dispatch(reset())
+                dispatch(reset())
+                break
+            case "BACK":
+                dispatch(back())
+                break
+            default:
         }
     }
 
@@ -92,13 +98,13 @@ function App(){
     }
 
     return(
-        <Container maxWidth="98%">
+        <Container maxWidth="xl">
                 <Header onClick={handleClick_modal}/>
                 <Grid container spacing={4}>
-                    <Grid item lg={9} xs={12}>
+                    <Grid item lg={8} xs={12}>
                         <Canvas onClick={handleClick_canvas} />
                     </Grid>
-                    <Grid item lg={3} xs={12}>
+                    <Grid item lg={4} xs={12}>
                         <Palette
                             onChange_width={(event, newValue) => handleChange_width(event,newValue)}
                             onChange_height={(event, newValue) => handleChange_height(event,newValue)}

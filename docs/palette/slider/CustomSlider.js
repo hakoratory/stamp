@@ -6,7 +6,7 @@ function CustomSlider(props){
         <Fragment>
             <Grid container spacing={2}>
                 <Grid item>
-                    <Typography variant="subtitle1">
+                    <Typography variant="subtitle2">
                         {props.displayName}
                     </Typography>
                 </Grid>
@@ -20,7 +20,7 @@ function CustomSlider(props){
                     />
                 </Grid>
                 <Grid item xs={2}>
-                    <Typography variant="subtitle1">
+                    <Typography variant="subtitle2">
                         <Box textAlign="right">
                             {props.value}/{props.max}
                         </Box>

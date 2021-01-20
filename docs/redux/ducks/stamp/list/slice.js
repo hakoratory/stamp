@@ -20,12 +20,16 @@ const listSlice = createSlice({
         reset: () => {
             return []
         },
+        back: (state, action) => {
+            state.pop()
+        }
     },
 })
 
 export const {
     add,
     reset,
+    back,
 } = listSlice.actions
 
 export default listSlice.reducer
