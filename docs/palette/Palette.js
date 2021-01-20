@@ -26,7 +26,11 @@ export default function Palette(props){
     useEffect(() => {
         if(matches && conf.width.value > 150){
             props.onChange_width({},150)
+        }
+        if(matches && conf.height.value > 150){
             props.onChange_height({},150)
+        }
+        if(matches && conf.borderRadius.value > 75){
             props.onChange_borderRadius({},75)
         }
     },[matches])
