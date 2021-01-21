@@ -7,7 +7,8 @@ import Canvas from './canvas/Canvas'
 import {
     add,
     reset,
-    back,
+    prev,
+    next,
 } from './redux/ducks/stamp/list/slice'
 import {
     changeWidth,
@@ -86,8 +87,11 @@ function App(){
             case "RESET":
                 dispatch(reset())
                 break
-            case "BACK":
-                dispatch(back())
+            case "PREV":
+                dispatch(prev())
+                break
+            case "NEXT":
+                dispatch(next())
                 break
             default:
         }

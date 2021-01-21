@@ -101,7 +101,8 @@ export default function Palette(props){
                     <Grid item xs={12} className="padding">
                         <Box display="flex" flexDirection="row">
                             <CustomButton id="RESET" onClick={props.onClick}/>
-                            <CustomButton id="BACK" onClick={props.onClick}/>
+                            <CustomButton id="PREV" onClick={props.onClick}/>
+                            <CustomButton id="NEXT" onClick={props.onClick}/>
                         </Box>
                     </Grid>
                 </Grid>

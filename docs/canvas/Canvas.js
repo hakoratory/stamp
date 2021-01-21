@@ -6,7 +6,10 @@ import { Box } from '@material-ui/core'
 
 export default function Canvas(props){
     const classes = useStyles()
-    const stampList = useSelector(selectors.listSelectors.selectList)
+    const stepNumber = useSelector(selectors.listSelectors.selectStepNumber)
+    const history = useSelector(selectors.listSelectors.selectList)
+    const current = history[stepNumber]
+    const list = current.list.slice()
 
     function stamp(stamp_data){
         let style = {
@@ -26,7 +29,7 @@ export default function Canvas(props){
         <Fragment>
             <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
                 <Box id="canvas" className={classes.canvas} onClick={props.onClick}>
-                    {stampList.map((value) => stamp(value))}
+                    {list.map((value) => stamp(value))}
                 </Box>
             </Box>
         </Fragment>
