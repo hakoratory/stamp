@@ -19,7 +19,7 @@ function AboutDialog(props){
         >
             <DialogTitle id="alert-dialog-title">{"About"}</DialogTitle>
             <DialogContent>
-            <DialogContentText id="alert-dialog-description">
+                <DialogContentText id="alert-dialog-description">
                 A tool for drawing pictures by stamping various shapes in the frame.
                 <br/>
                 <br/>
@@ -30,7 +30,7 @@ function AboutDialog(props){
                 <br/>
                 How to stamp
                 <br/>
-                1. Determine the size of the frame (window size)<sup>[注1]</sup>.
+                1. Determine the size of the frame (window size)<sup>[*1]</sup>.
                 <br/>
                 2. Use the sliders to change the size, shape, opacity, and color of the stamp.
                 <br/>
@@ -59,7 +59,7 @@ function AboutDialog(props){
                 <br/>
                 notes
                 <br/>
-                1. If you resize the window after pressing some stamps, these you press will retain its position.
+                1. If you resize the window after pressing some stamps, these you was pressed will retain its position.
 
             </DialogContentText>
             </DialogContent>

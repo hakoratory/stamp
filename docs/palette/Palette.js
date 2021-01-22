@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
-import { Box, Grid, Typography, useTheme, useMediaQuery } from '@material-ui/core'
+import { Grid, Typography, useTheme, useMediaQuery } from '@material-ui/core'
 import { HuePicker } from 'react-color'
 import CustomSlider from './slider/CustomSlider'
 import Preview from './preview/Preview'
-import CustomButton from './button/CustomButton'
 import { useSelector } from 'react-redux'
 import * as selectors from '../redux/rootSelectors'
 
@@ -36,11 +35,11 @@ export default function Palette(props){
     },[matches])
     
     return (
-        <Grid container spacing={3} alignItems="center" justify="center">
-            <Grid item lg={12} md={5} sm={4} xs={12}>
+        <Grid container spacing={3} alignItems="flex-start" justify="center">
+            <Grid item md={5} sm={5} xs={12}>
                 <Preview />
             </Grid>
-            <Grid item lg={10} md={6} sm={8} xs={12}>
+            <Grid item md={5} sm={5} xs={10}>
                 <Grid container>
                     <Grid item xs={12} className="padding">
                         <CustomSlider
@@ -97,12 +96,6 @@ export default function Palette(props){
                                     />
                             </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid item xs={12} className="padding">
-                        <Box display="flex" flexDirection="row">
-                            <CustomButton id="RESET" onClick={props.onClick}/>
-                            <CustomButton id="BACK" onClick={props.onClick}/>
-                        </Box>
                     </Grid>
                 </Grid>
             </Grid>
