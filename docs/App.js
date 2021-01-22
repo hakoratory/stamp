@@ -25,8 +25,6 @@ import * as selectors from './redux/rootSelectors'
 import PersistentDrawerBottom from './drawer/PersistentDrawerBottom'
 import IconButton from '@material-ui/core/IconButton'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
-import { IOSView } from 'react-device-detect'
-
 
 export const useStyles = makeStyles((theme) => ({
     canvas: {
@@ -176,9 +174,6 @@ function App(){
                     onClick={handleClick_button}
                     />
             </PersistentDrawerBottom>
-            <IOSView>
-                <Box>iOs</Box>
-            </IOSView>
         </Fragment>
     )
 }
