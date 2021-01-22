@@ -10,7 +10,7 @@ export const IOSSlider = withStyles({
   root: {
     color: '#3880ff',
     height: 2,
-    padding: '10px 0',
+    padding: '12px 0',
   },
   thumb: {
     height: 20,
@@ -42,7 +42,7 @@ export const IOSSlider = withStyles({
   rail: {
     height: 2,
     opacity: 0.5,
-    backgroundColor: '#bfbfbf',
+    backgroundColor: '#808080',
   },
   mark: {
     backgroundColor: '#bfbfbf',
