@@ -9,7 +9,8 @@ import CustomButton from './palette/button/CustomButton'
 import {
     add,
     reset,
-    back,
+    prev,
+    next,
 } from './redux/ducks/stamp/list/slice'
 import {
     changeWidth,
@@ -103,8 +104,11 @@ function App(){
             case "RESET":
                 dispatch(reset())
                 break
-            case "BACK":
-                dispatch(back())
+            case "PREV":
+                dispatch(prev())
+                break
+            case "NEXT":
+                dispatch(next())
                 break
             default:
         }
@@ -143,7 +147,8 @@ function App(){
                 <Canvas onClick={handleClick_canvas} height={height}/>
                 <Box display="flex" flexDirection="row">
                     <CustomButton id="RESET" onClick={(event, id) => handleClick_button(event, id)}/>
-                    <CustomButton id="BACK" onClick={(event, id) => handleClick_button(event, id)}/>
+                    <CustomButton id="PREV" onClick={(event, id) => handleClick_button(event, id)}/>
+                    <CustomButton id="NEXT" onClick={(event, id) => handleClick_button(event, id)}/>
                 </Box>
                 <Box display="flex" alignItems="center" justifyContent="center">
                     <IconButton  onClick={handleDrawerOpen}>
