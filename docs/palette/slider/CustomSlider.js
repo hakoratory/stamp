@@ -10,7 +10,7 @@ export const IOSSlider = withStyles({
   root: {
     color: '#3880ff',
     height: 2,
-    padding: '12px 0',
+    padding: '13px 0',
   },
   thumb: {
     height: 20,
@@ -44,7 +44,9 @@ function CustomSlider(props){
             <Grid container spacing={2}>
                 <Grid item>
                     <Typography variant="subtitle2">
-                        {props.displayName}
+                        <Box lineHeight={2}>
+                            {props.displayName}
+                        </Box>
                     </Typography>
                 </Grid>
                 <Grid item xs>
@@ -67,7 +69,7 @@ function CustomSlider(props){
                 </Grid>
                 <Grid item xs={2}>
                     <Typography variant="subtitle2">
-                        <Box textAlign="right">
+                        <Box textAlign="right" lineHeight={2}>
                             {props.value}/{props.max}
                         </Box>
                     </Typography>

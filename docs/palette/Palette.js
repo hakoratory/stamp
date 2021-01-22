@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Grid, Typography, useTheme, useMediaQuery } from '@material-ui/core'
+import { Box, Grid, Typography, useTheme, useMediaQuery } from '@material-ui/core'
 import { HuePicker } from 'react-color'
 import CustomSlider from './slider/CustomSlider'
 import Preview from './preview/Preview'
@@ -41,7 +41,7 @@ export default function Palette(props){
             </Grid>
             <Grid item md={5} sm={5} xs={10}>
                 <Grid container>
-                    <Grid item xs={12} className="padding">
+                    <Grid item xs={12}>
                         <CustomSlider
                             id={conf.width.id}
                             displayName={conf.width.displayName}
@@ -51,7 +51,7 @@ export default function Palette(props){
                             onChange={props.onChange_width}
                             />
                     </Grid>
-                    <Grid item xs={12} className="padding">
+                    <Grid item xs={12}>
                         <CustomSlider
                             id={conf.height.id}
                             displayName={conf.height.displayName}
@@ -61,7 +61,7 @@ export default function Palette(props){
                             onChange={props.onChange_height}
                             />
                     </Grid>
-                    <Grid item xs={12} className="padding">
+                    <Grid item xs={12}>
                         <CustomSlider
                             id={conf.borderRadius.id}
                             displayName={conf.borderRadius.displayName}
@@ -71,7 +71,7 @@ export default function Palette(props){
                             onChange={props.onChange_borderRadius}
                             />
                     </Grid>
-                    <Grid item xs={12} className="padding">
+                    <Grid item xs={12}>
                         <CustomSlider
                             id={conf.opacity.id}
                             displayName={conf.opacity.displayName}
@@ -81,11 +81,13 @@ export default function Palette(props){
                             onChange={props.onChange_opacity}
                             />
                     </Grid>
-                    <Grid item xs={12} className="padding">
+                    <Grid item xs={12}>
                         <Grid container spacing={2} alignItems="center">
                             <Grid item>
                                 <Typography variant="subtitle2">
-                                    {conf.backgroundColor.displayName}
+                                    <Box lineHeight={2}>
+                                        {conf.backgroundColor.displayName}
+                                    </Box>
                                 </Typography>
                             </Grid>
                             <Grid item xs>

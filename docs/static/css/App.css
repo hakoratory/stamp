@@ -6,11 +6,6 @@ body {
     cursor: pointer;
 }
 
-.padding {
-    padding-left: 16px;
-    padding-right: 16px;
-}
-
 .padding-top {
     padding-top: 5px !important;
 }
