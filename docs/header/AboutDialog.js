@@ -25,7 +25,7 @@ function AboutDialog(props){
                 <br/>
                 Version
                 <br/>
-                1.4
+                1.5
                 <br/>
                 <br/>
                 How to stamp

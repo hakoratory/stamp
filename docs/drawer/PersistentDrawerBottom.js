@@ -5,9 +5,6 @@ import IconButton from '@material-ui/core/IconButton'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 export const useStylesDrawer = makeStyles((theme) => ({
-    /* hide: {
-    display: 'none',
-    }, */
     drawer: {
         width: "95%",
         [theme.breakpoints.up('md')]: {

@@ -31,7 +31,6 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: "#FFFFFF",
         width: "100%",
         height: window.innerHeight - 70 - 120
-        //height: "75vh",
     },
     canvas_frame: {
         
@@ -152,7 +151,7 @@ function App(){
                     </IconButton>
                 </Box>
             </Container>
-            {/* ドロワーに、ブレークポイントごとの高さを渡す lg md sm xs */}
+            {/* ドロワーに、ブレークポイントごとの高さを渡す md sm xs */}
             <PersistentDrawerBottom
                 mdHeight={65 + 350}
                 smHeight={65 + 175}
