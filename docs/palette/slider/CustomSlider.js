@@ -28,14 +28,6 @@ export const IOSSlider = withStyles({
     },
   },
   active: {},
-  valueLabel: {
-    left: 'calc(-50% + 12px)',
-    top: -22,
-    '& *': {
-      background: 'transparent',
-      color: '#000',
-    },
-  },
   track: {
     height: 2,
   },
@@ -44,32 +36,7 @@ export const IOSSlider = withStyles({
     opacity: 0.5,
     backgroundColor: '#808080',
   },
-  mark: {
-    backgroundColor: '#bfbfbf',
-    height: 8,
-    width: 1,
-    marginTop: -3,
-  },
-  markActive: {
-    opacity: 1,
-    backgroundColor: 'currentColor',
-  },
 })(Slider);
-
-const marks = [
-  {
-    value: 0,
-  },
-  {
-    value: 20,
-  },
-  {
-    value: 37,
-  },
-  {
-    value: 100,
-  },
-];
 
 function CustomSlider(props){
     return(
