@@ -1,11 +1,19 @@
 import React, {Fragment} from 'react'
 import { useSelector } from 'react-redux'
 import * as selectors from '../redux/rootSelectors'
-import { useStyles } from '../App'
-import { Box } from '@material-ui/core'
+import { Box, makeStyles } from '@material-ui/core'
+
+export const useStylesCanvas = makeStyles((theme) => ({
+    canvas: {
+        border: "2px solid #808080",
+        backgroundColor: "#FFFFFF",
+        width: "100%",
+        height: props => props.height - 67 - 115
+    },
+}))
 
 export default function Canvas(props){
-    const classes = useStyles()
+    const classes = useStylesCanvas(props)
     const stampList = useSelector(selectors.listSelectors.selectList)
 
     function stamp(stamp_data){

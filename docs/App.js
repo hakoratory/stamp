@@ -1,10 +1,8 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import './static/css/App.css'
+import clsx from 'clsx';
 import Header from './header/Header'
-import { Container, Drawer, makeStyles, Box } from '@material-ui/core'
-import IconButton from '@material-ui/core/IconButton'
-import ExpandLessIcon from '@material-ui/icons/ExpandLess'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { Container, makeStyles, Box } from '@material-ui/core'
 import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
 import CustomButton from './palette/button/CustomButton'
@@ -23,14 +21,20 @@ import {
 import { modal } from './redux/ducks/modal/slice'
 import { useDispatch, useSelector } from 'react-redux'
 import * as selectors from './redux/rootSelectors'
-import { useTheme } from '@material-ui/core/styles'
+import PersistentDrawerBottom from './drawer/PersistentDrawerBottom'
+import IconButton from '@material-ui/core/IconButton'
+import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 
 export const useStyles = makeStyles((theme) => ({
     canvas: {
         border: "2px solid #808080",
         backgroundColor: "#FFFFFF",
-        width: "95%",
-        height: "75vh",
+        width: "100%",
+        height: window.innerHeight - 70 - 120
+        //height: "75vh",
+    },
+    canvas_frame: {
+        
     },
     preview: {
         [theme.breakpoints.up('md')]: {
@@ -42,33 +46,27 @@ export const useStyles = makeStyles((theme) => ({
             height: "170px",
         },
     },
-    /* hide: {
-    display: 'none',
-    }, */
-    drawer: {
-        width: "100%",
-        height: "50%",
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        width: "100%",
-        height: "50%",
-        backgroundColor: "#C0C0C0",
-        borderTop: "1px solid #000"
-    },
     content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        [theme.breakpoints.up('md')]: {
+            marginBottom: -(65 + 350),
+        },
+        [theme.breakpoints.down('sm')]: {
+            marginBottom: -(65 + 175),
+        },
+        [theme.breakpoints.down('xs')]: {
+            marginBottom: -(65 + 175 + 185),
+        },
     },
     contentShift: {
-    transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-    }),
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        marginBottom: 0,
     },
 }))
 
@@ -117,47 +115,51 @@ function App(){
         dispatch(modal())
     }
 
-    const classes = useStyles();
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [height, setHeight] = useState(window.innerHeight)
+
+    useEffect(() => {
+        const onResize = () => {
+            return setHeight(window.innerHeight)
+        }
+        window.addEventListener('resize', onResize)
+        return () => window.removeEventListener('resize', onResize)
+    }, [height])
+
+    const classes = useStyles()
+
+    const [open, setOpen] = useState(false);
 
     const handleDrawerOpen = () => {
-    setOpen(true);
+        setOpen(true);
     };
 
     const handleDrawerClose = () => {
-    setOpen(false);
+        setOpen(false);
     };
 
     return(
         <Fragment>
-            <Container maxWidth="xl">
-                    <Header onClick={handleClick_modal}/>
-                    <Canvas onClick={handleClick_canvas} />
-                    <Box display="flex" flexDirection="row">
-                        <CustomButton id="RESET" onClick={(event, id) => handleClick_button(event, id)}/>
-                        <CustomButton id="BACK" onClick={(event, id) => handleClick_button(event, id)}/>
-                    </Box>
-            </Container>
-            <Box display="flex" alignItems="center" justifyContent="center">
-                <IconButton  onClick={handleDrawerOpen}>
-                    <ExpandLessIcon fontSize="large"/>
-                </IconButton>
-            </Box>
-            <Drawer
-                className={classes.drawer}
-                variant="persistent"
-                anchor="bottom"
-                open={open}
-                classes={{
-                paper: classes.drawerPaper,
-                }}
-                >
+            <Container maxWidth="xl" className={clsx(classes.content, {[classes.contentShift]: open})}>
+                <Header onClick={handleClick_modal}/>
+                <Canvas onClick={handleClick_canvas} height={height}/>
+                <Box display="flex" flexDirection="row">
+                    <CustomButton id="RESET" onClick={(event, id) => handleClick_button(event, id)}/>
+                    <CustomButton id="BACK" onClick={(event, id) => handleClick_button(event, id)}/>
+                </Box>
                 <Box display="flex" alignItems="center" justifyContent="center">
-                    <IconButton onClick={handleDrawerClose}>
-                        <ExpandMoreIcon  fontSize="large"/>
+                    <IconButton  onClick={handleDrawerOpen}>
+                        <ExpandLessIcon fontSize="large"/>
                     </IconButton>
                 </Box>
+            </Container>
+            {/* ドロワーに、ブレークポイントごとの高さを渡す lg md sm xs */}
+            <PersistentDrawerBottom
+                mdHeight={65 + 350}
+                smHeight={65 + 175}
+                xsHeight={65 + 175 + 185}
+                open={open}
+                onOpen={handleDrawerOpen}
+                onClose={handleDrawerClose}>
                 <Palette
                     className="margin-top-important"
                     onChange_width={(event, newValue) => handleChange_width(event,newValue)}
@@ -167,7 +169,7 @@ function App(){
                     onChange_backgroundColor={(event, newValue) => handleChange_backgroundColor(event,newValue)}
                     onClick={handleClick_button}
                     />
-            </Drawer>
+            </PersistentDrawerBottom>
         </Fragment>
     )
 }
