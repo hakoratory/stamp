@@ -39,9 +39,9 @@ export default function Palette(props){
             <Grid item md={5} sm={5} xs={12}>
                 <Preview />
             </Grid>
-            <Grid item md={5} sm={5} xs={10}>
+            <Grid item md={5} sm={5} xs={12}>
                 <Grid container>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="padding">
                         <CustomSlider
                             id={conf.width.id}
                             displayName={conf.width.displayName}
@@ -51,7 +51,7 @@ export default function Palette(props){
                             onChange={props.onChange_width}
                             />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="padding">
                         <CustomSlider
                             id={conf.height.id}
                             displayName={conf.height.displayName}
@@ -61,7 +61,7 @@ export default function Palette(props){
                             onChange={props.onChange_height}
                             />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="padding">
                         <CustomSlider
                             id={conf.borderRadius.id}
                             displayName={conf.borderRadius.displayName}
@@ -71,7 +71,7 @@ export default function Palette(props){
                             onChange={props.onChange_borderRadius}
                             />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="padding">
                         <CustomSlider
                             id={conf.opacity.id}
                             displayName={conf.opacity.displayName}
@@ -81,7 +81,7 @@ export default function Palette(props){
                             onChange={props.onChange_opacity}
                             />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="padding">
                         <Grid container spacing={2} alignItems="center">
                             <Grid item>
                                 <Typography variant="subtitle2">

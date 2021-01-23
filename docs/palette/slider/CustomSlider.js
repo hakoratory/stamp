@@ -38,6 +38,10 @@ export const IOSSlider = withStyles({
   },
 })(Slider);
 
+const width = {
+    width: "80px"
+}
+
 function CustomSlider(props){
     return(
         <Fragment>
@@ -69,7 +73,7 @@ function CustomSlider(props){
                 </Grid>
                 <Grid item xs={2}>
                     <Typography variant="subtitle2">
-                        <Box textAlign="right" lineHeight={2}>
+                        <Box textAlign="right" lineHeight={2} style={width}>
                             {props.value}/{props.max}
                         </Box>
                     </Typography>
