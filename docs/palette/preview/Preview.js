@@ -3,15 +3,16 @@ import { Grid, Box } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import * as selectors from '../../redux/rootSelectors'
 import { useStyles } from '../../App'
+import { getPreview } from '../../redux/utils'
 
-function Preview(props){
+function Preview(){
     const classes = useStyles()
-    const preview = useSelector(selectors.confSelectors.selectConfAsPreview)
+    const currentConf = useSelector(selectors.confSelectors.selectConf)
     
     return (
         <Box display="flex" alignItems="center" justifyContent="center">
             <Box display="flex" bgcolor="white" className={classes.preview} alignItems="center" justifyContent="center" border={1}>
-                <Box className="preview_body" style={preview}></Box>
+                <Box className="preview_body" style={getPreview(currentConf)}></Box>
             </Box>
         </Box>
     )

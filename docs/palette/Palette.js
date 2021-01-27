@@ -3,11 +3,18 @@ import { Box, Grid, Typography, useTheme, useMediaQuery } from '@material-ui/cor
 import { HuePicker } from 'react-color'
 import CustomSlider from './slider/CustomSlider'
 import Preview from './preview/Preview'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as selectors from '../redux/rootSelectors'
+import {
+    changeWidth,
+    changeHeight,
+    changeBorderRadius,
+    changeOpacity,
+    changeBackgroundColor,
+} from '../redux/ducks/stamp/conf/actions'
 
 export default function Palette(props){
-
+    const dispatch = useDispatch()
     const conf = useSelector(selectors.confSelectors.selectConf)
 
     const handleChangeBackgroundColor = (color) => {
@@ -16,7 +23,7 @@ export default function Palette(props){
                 id: conf.backgroundColor.id,
             }
         }
-        props.onChange_backgroundColor(event, color.hex)
+        handleChange_backgroundColor(event, color.hex)
     }
 
     const theme = useTheme()
@@ -33,6 +40,26 @@ export default function Palette(props){
             props.onChange_borderRadius({},75)
         }
     },[matches])
+
+    const handleChange_width = (event, newValue) => {
+        dispatch(changeWidth({value: newValue}))
+    }
+
+    const handleChange_height = (event, newValue) => {
+        dispatch(changeHeight({value: newValue}))
+    }
+
+    const handleChange_borderRadius = (event, newValue) => {
+        dispatch(changeBorderRadius({value: newValue}))
+    }
+
+    const handleChange_opacity = (event, newValue) => {
+        dispatch(changeOpacity({value: newValue}))
+    }
+
+    const handleChange_backgroundColor = (event, newValue) => {
+        dispatch(changeBackgroundColor({value: newValue}))
+    }
     
     return (
         <Grid container spacing={3} alignItems="flex-start" justify="center">
@@ -48,7 +75,7 @@ export default function Palette(props){
                             step={1}
                             max={matches ? 150 : 300} 
                             value={conf.width.value}
-                            onChange={props.onChange_width}
+                            onChange={(event, newValue) => handleChange_width(event, newValue)}
                             />
                     </Grid>
                     <Grid item xs={12} className="padding">
@@ -58,7 +85,7 @@ export default function Palette(props){
                             step={1}
                             max={matches ? 150 : 300}
                             value={conf.height.value}
-                            onChange={props.onChange_height}
+                            onChange={(event, newValue) => handleChange_height(event, newValue)}
                             />
                     </Grid>
                     <Grid item xs={12} className="padding">
@@ -68,7 +95,7 @@ export default function Palette(props){
                             step={1}
                             max={matches ? 75 : 150}
                             value={conf.borderRadius.value}
-                            onChange={props.onChange_borderRadius}
+                            onChange={(event, newValue) => handleChange_borderRadius(event, newValue)}
                             />
                     </Grid>
                     <Grid item xs={12} className="padding">
@@ -78,7 +105,7 @@ export default function Palette(props){
                             step={0.1}
                             max={1}
                             value={conf.opacity.value}
-                            onChange={props.onChange_opacity}
+                            onChange={(event, newValue) => handleChange_opacity(event, newValue)}
                             />
                     </Grid>
                     <Grid item xs={12} className="padding">

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import './static/css/App.css'
 import clsx from 'clsx';
 import Header from './header/Header'
@@ -6,27 +6,16 @@ import { Container, makeStyles, Box } from '@material-ui/core'
 import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
 import CustomButton from './palette/button/CustomButton'
-import {
-    add,
-    reset,
-    prev,
-    next,
-} from './redux/ducks/stamp/list/slice'
-import {
-    changeWidth,
-    changeHeight,
-    changeBorderRadius,
-    changeOpacity,
-    changeBackgroundColor,
-} from './redux/ducks/stamp/conf/slice'
 import { modal } from './redux/ducks/modal/slice'
-import { useDispatch, useSelector } from 'react-redux'
-import * as selectors from './redux/rootSelectors'
+import { useDispatch } from 'react-redux'
 import PersistentDrawerBottom from './drawer/PersistentDrawerBottom'
 import IconButton from '@material-ui/core/IconButton'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
+import { reset } from './redux/ducks/stamp/stampSlice'
+import { back, next, set } from './redux/ducks/stamp/step/actions'
 
 export const useStyles = makeStyles((theme) => ({
+    //TODO move to each components
     canvas: {
         border: "2px solid #808080",
         backgroundColor: "#FFFFFF",
@@ -73,65 +62,15 @@ export const useStyles = makeStyles((theme) => ({
 
 function App(){
     const dispatch = useDispatch()
-    const currentConf = useSelector(selectors.confSelectors.selectConf)
 
-    const handleChange_width = (event, newValue) => {
-        dispatch(changeWidth({value: newValue}))
-    }
-
-    const handleChange_height = (event, newValue) => {
-        dispatch(changeHeight({value: newValue}))
-    }
-
-    const handleChange_borderRadius = (event, newValue) => {
-        dispatch(changeBorderRadius({value: newValue}))
-    }
-
-    const handleChange_opacity = (event, newValue) => {
-        dispatch(changeOpacity({value: newValue}))
-    }
-
-    const handleChange_backgroundColor = (event, newValue) => {
-        dispatch(changeBackgroundColor({value: newValue}))
-    }
-
-    const handleClick_canvas = (event) => {
-        dispatch(add({x: event.pageX, y: event.pageY, currentConf: currentConf}))
-    }
-
-    const handleClick_button = (event, id) => {
-        switch(id){
-            case "RESET":
-                dispatch(reset())
-                break
-            case "PREV":
-                dispatch(prev())
-                break
-            case "NEXT":
-                dispatch(next())
-                break
-            default:
-        }
-    }
-
+    // move to Header component
     const handleClick_modal = () => {
         dispatch(modal())
     }
 
-    const [height, setHeight] = useState(window.innerHeight)
-
-    useEffect(() => {
-        const onResize = () => {
-            return setHeight(window.innerHeight)
-        }
-        window.addEventListener('resize', onResize)
-        return () => window.removeEventListener('resize', onResize)
-    }, [height])
-
     const classes = useStyles()
 
     const [open, setOpen] = useState(false);
-
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -140,11 +79,27 @@ function App(){
         setOpen(false);
     };
 
+    // create new component
+    const handleClick_button = (event, id) => {
+        switch(id){
+            case "RESET":
+                dispatch(reset())
+                break
+            case "PREV":
+                dispatch(back())
+                break
+            case "NEXT":
+                dispatch(next())
+                break
+            default:
+        }
+    }
+
     return(
         <Fragment>
             <Container maxWidth="xl" className={clsx(classes.content, {[classes.contentShift]: open})}>
                 <Header onClick={handleClick_modal}/>
-                <Canvas onClick={handleClick_canvas} height={height}/>
+                <Canvas />
                 <Box display="flex" flexDirection="row">
                     <CustomButton id="RESET" onClick={(event, id) => handleClick_button(event, id)}/>
                     <CustomButton id="PREV" onClick={(event, id) => handleClick_button(event, id)}/>
@@ -164,15 +119,7 @@ function App(){
                 open={open}
                 onOpen={handleDrawerOpen}
                 onClose={handleDrawerClose}>
-                <Palette
-                    className="margin-top-important"
-                    onChange_width={(event, newValue) => handleChange_width(event,newValue)}
-                    onChange_height={(event, newValue) => handleChange_height(event,newValue)}
-                    onChange_borderRadius={(event, newValue) => handleChange_borderRadius(event,newValue)}
-                    onChange_opacity={(event, newValue) => handleChange_opacity(event,newValue)}
-                    onChange_backgroundColor={(event, newValue) => handleChange_backgroundColor(event,newValue)}
-                    onClick={handleClick_button}
-                    />
+                <Palette className="margin-top-important"/>
             </PersistentDrawerBottom>
         </Fragment>
     )
