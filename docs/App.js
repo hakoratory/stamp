@@ -35,6 +35,14 @@ function App(){
     const classes = useStyles()
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        function noScroll(event){
+            event.preventDefault();
+        }
+
+        document.addEventListener('touchmove', noScroll, { passive: false });
+    })
+
     // move to Header component
     const handleClick_modal = () => {
         dispatch(modal())
