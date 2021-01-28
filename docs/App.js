@@ -65,6 +65,7 @@ function App(){
 
     const handleTouch = () => {
         console.log('onTouchApp')
+        alert('ontouch app')
         //swipeRef.disableScrolling(false)
     }
 
