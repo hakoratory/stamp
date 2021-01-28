@@ -4,7 +4,7 @@ A tool for drawing pictures by stamping various shapes in the frame.
 
 ## Version
 
-1.7
+1.8
 
 ## How to stamp
 
