@@ -14,7 +14,7 @@ export const useStylesCanvas = makeStyles((theme) => ({
         
     },
     canvas: {
-        position: "relative",
+        //position: "relative",
         border: "2px solid #808080",
         backgroundColor: "#FFFFFF",
         width: "80%",
@@ -42,15 +42,17 @@ export default function Canvas(props){
         return () => window.removeEventListener('resize', onResize)
     }, [height])
 
-    const [canvasX, setCanvasX] = useState(0)
+    /* const [canvasX, setCanvasX] = useState(0)
     const [canvasY, setCanvasY] = useState(0)
 
     const measuredRef = useCallback(node => {
         if(node !== null){
-            setCanvasX(node.getBoundingClientRect().x)
-            setCanvasY(node.getBoundingClientRect().y)
+            setTimeout(function(){
+                setCanvasX(node.getBoundingClientRect().left + window.pageXOffset)
+                setCanvasY(node.getBoundingClientRect().top + window.pageYOffset)
+            },1000)   
         }
-    },[])
+    },[]) */
 
 
     const classes = useStylesCanvas(height)
@@ -65,26 +67,34 @@ export default function Canvas(props){
             borderRadius: stamp_data.borderRadius + "px",
             backgroundColor: stamp_data.backgroundColor,
             opacity: stamp_data.opacity,
+            transform: "rotate(" + stamp_data.rotate + "deg)"
         }
         return <Box style={style} key={stamp_data.number}></Box>
     }
 
     const handleClickCanvas = (event) => {
-        //dispatch(add({x: event.pageX, y: event.pageY, currentConf: currentConf}))
-        dispatch(add({x: event.pageX - canvasX, y: event.pageY - canvasY}))
+        props.onClick(event)
         dispatch(set(currentList.length))
+        /* dispatch(add({x: event.pageX, y: event.pageY}))
+        dispatch(set(currentList.length)) */
     }
+
 
     /* const handleTestStamp = () => {
         dispatch(testStamp())
         dispatch(set(4999))
     } */
 
-    //document.getElementById('canvas').addEventListener('touch', )
-
     return(
         <Fragment>
-            <Box id="canvas" className={classes.canvas} onClick={(event) => handleClickCanvas(event)} ref={measuredRef} onTouchStart={props.onTouchStart} onTouchEnd={props.onTouchEnd}>
+            <Box
+                id="canvas"
+                className={classes.canvas}
+                onClick={(event) => handleClickCanvas(event)}
+                /* ref={measuredRef} */
+                onTouchStart={props.onTouchStart}
+                onTouchEnd={props.onTouchEnd}
+                >
                 {currentList.map((value) => stamp(value))}
             </Box>
             {/* <button type="button" onClick={handleTestStamp}>test stamp</button> */}

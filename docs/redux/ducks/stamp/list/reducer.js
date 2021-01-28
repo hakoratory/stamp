@@ -14,7 +14,8 @@ export const listReducer = createReducer(null, (builder) => {
                 height: state.conf.height.value,
                 borderRadius: state.conf.borderRadius.value,
                 opacity: state.conf.opacity.value,
-                backgroundColor: state.conf.backgroundColor.value
+                backgroundColor: state.conf.backgroundColor.value,
+                rotate: state.conf.rotate.value,
             })
             return list
         })

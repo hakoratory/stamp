@@ -4,7 +4,7 @@ import Header from './header/Header'
 import { makeStyles, Box, BottomNavigation, BottomNavigationAction, Divider } from '@material-ui/core'
 import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
-import CustomButton from './palette/button/CustomButton'
+import CustomButton from './palette/parts/CustomButton'
 import { modal } from './redux/ducks/modal/slice'
 import { useDispatch } from 'react-redux'
 import IconButton from '@material-ui/core/IconButton'
@@ -12,6 +12,9 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { reset } from './redux/ducks/stamp/stampSlice'
 import { back, next } from './redux/ducks/stamp/step/actions'
+import {
+    add,
+} from './redux/ducks/stamp/list/actions'
 import ReactSwipe from 'react-swipe'
 
 export const useStyles = makeStyles((theme) => ({
@@ -54,27 +57,48 @@ function App(){
         dispatch(next())
     }
 
-    /* const [swipeRef, setSwipeRef] = useState(null)
-    useEffect(() => {
-        console.log('test')
-        if(swipeRef !== null){
-            swipeRef.next()
-        }
-    }) */
+    //const [swipeRef, setSwipeRef] = useState(null)
+
     let swipeRef
+
+    //const [positionX, setPositionX] = useState(0)
+    //const [positionY, setPositionY] = useState(0)
+    let positionX = 0
+    let positionY = 0
+
+    useEffect(() => {
+        positionX = swipeRef.containerEl.getBoundingClientRect().left
+        positionY = swipeRef.containerEl.getBoundingClientRect().top
+        //setPositionX(swipeRef.containerEl.getBoundingClientRect().left)
+        //setPositionY(swipeRef.containerEl.getBoundingClientRect().top)
+    },[])
+    //const [disableScroll, setDisableScroll] = useState(false)
+
+    /* const [rect, setRect] = useState(null)
+    const swipeRef = useCallback(node => {
+        if(node !== null){
+            setRect(node.getBoundingClientRect())
+            console.log(reect.height)
+        }
+    },[]) */
+
+    const handleClickCanvas = (event) => {
+        dispatch(add({
+            x: event.pageX - swipeRef.containerEl.getBoundingClientRect().left,
+            y: event.pageY - swipeRef.containerEl.getBoundingClientRect().top
+        }))   
+    }
 
     const handleTouchStart = () => {
         console.log('onTouchStart')
-        //swipeRef.disableScrolling(false)
-        //console.log(swipeRef.props.swipeOptions.disableScroll)
         swipeRef.props.swipeOptions.disableScroll = true
+        console.log(swipeRef.props.swipeOptions)
     }
 
     const handleTouchEnd = () => {
         console.log('onTouchEnd')
-        //swipeRef.disableScrolling(false)
-        //console.log(swipeRef.props.swipeOptions.disableScroll)
         swipeRef.props.swipeOptions.disableScroll = false
+        console.log(swipeRef.props.swipeOptions)
     }
 
     return(
@@ -84,11 +108,18 @@ function App(){
                 className="carousel"
                 swipeOptions={{continuous: false,disableScroll: false}}
                 ref={el => swipeRef = el}>
-                <Box width="95%">
-                    <Canvas swipeRef={swipeRef} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}/>
+                <Box width="80%">
+                    <Canvas
+                        swipeRef={swipeRef}
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
+                        onClick={(event) => handleClickCanvas(event)}
+                        //positionX={positionX}
+                        //positionY={positionY}
+                        />
                 </Box>
                 <Box width="95%">
-                    <Palette />
+                    <Palette  onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}/>
                 </Box>
             </ReactSwipe>
             <Box>

@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { Box, Grid, Typography, useTheme, useMediaQuery } from '@material-ui/core'
 import { HuePicker } from 'react-color'
-import CustomSlider from './slider/CustomSlider'
+import CustomSlider from './parts/CustomSlider'
 import Preview from './preview/Preview'
 import { useDispatch, useSelector } from 'react-redux'
 import * as selectors from '../redux/rootSelectors'
@@ -10,9 +10,11 @@ import {
     changeHeight,
     changeBorderRadius,
     changeOpacity,
+    changeRotate,
     changeBackgroundColor,
 } from '../redux/ducks/stamp/conf/actions'
 import { useStylesCanvas } from '../canvas/Canvas'
+import CustomColor from './parts/CustomColor'
 
 export default function Palette(props){
     const dispatch = useDispatch()
@@ -60,11 +62,16 @@ export default function Palette(props){
         dispatch(changeBorderRadius({value: newValue}))
     }
 
+    const handleChangeRotate = (event, newValue) => {
+        dispatch(changeRotate({value: newValue}))
+    }
+
     const handleChangeOpacity = (event, newValue) => {
         dispatch(changeOpacity({value: newValue}))
     }
 
     const handleChangeBackgroundColor = (color) => {
+        console.log(color)
         dispatch(changeBackgroundColor({value: color.hex}))
     }
     
@@ -82,7 +89,7 @@ export default function Palette(props){
     const classes = useStylesCanvas(height)
 
     return (
-        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" className={classes.canvas}>
+        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" className={classes.canvas} onTouchStart={props.onTouchStart} onTouchEnd={props.onTouchEnd}>
             <Box>
                 <Preview />
             </Box>
@@ -91,6 +98,7 @@ export default function Palette(props){
                     id={conf.width.id}
                     displayName={conf.width.displayName}
                     step={1}
+                    min={0}
                     max={matches ? 150 : 300} 
                     value={conf.width.value}
                     onChange={(event, newValue) => handleChangeWidth(event, newValue)}
@@ -99,6 +107,7 @@ export default function Palette(props){
                     id={conf.height.id}
                     displayName={conf.height.displayName}
                     step={1}
+                    min={0}
                     max={matches ? 150 : 300}
                     value={conf.height.value}
                     onChange={(event, newValue) => handleChangeHeight(event, newValue)}
@@ -107,19 +116,30 @@ export default function Palette(props){
                     id={conf.borderRadius.id}
                     displayName={conf.borderRadius.displayName}
                     step={1}
+                    min={0}
                     max={matches ? 75 : 150}
                     value={conf.borderRadius.value}
                     onChange={(event, newValue) => handleChangeBorderRadius(event, newValue)}
                     />
                 <CustomSlider
+                    id={conf.rotate.id}
+                    displayName={conf.rotate.displayName}
+                    step={1}
+                    min={0}
+                    max={180}
+                    value={conf.rotate.value}
+                    onChange={(event, newValue) => handleChangeRotate(event, newValue)}
+                    />
+                <CustomSlider
                     id={conf.opacity.id}
                     displayName={conf.opacity.displayName}
                     step={0.1}
+                    min={0}
                     max={1}
                     value={conf.opacity.value}
                     onChange={(event, newValue) => handleChangeOpacity(event, newValue)}
                     />
-                <Box display="flex" flexDirection="row" alignItems="center">
+                {/* <Box display="flex" flexDirection="row" alignItems="center">
                     <Typography variant="subtitle2">
                         <Box lineHeight={3} pr={1}>
                             {conf.backgroundColor.displayName}
@@ -132,6 +152,14 @@ export default function Palette(props){
                             width={conf.backgroundColor.width}
                             />
                     </Box>
+                </Box> */}
+                <Box>
+                    <CustomColor
+                        displayName={conf.backgroundColor.displayName}
+                        color={conf.backgroundColor.value}
+                        onChange={handleChangeBackgroundColor}
+                        width={conf.backgroundColor.width}
+                        />
                 </Box>
             </Box>
         </Box>

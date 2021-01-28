@@ -19,8 +19,13 @@ const initialState = {
         },
         borderRadius: {
             id: "border radius",
-            displayName: "R",
+            displayName: "BR",
             value: 10,
+        },
+        rotate: {
+            id: "rotate",
+            displayName: "R",
+            value: 0,
         },
         opacity: {
             id: "opacity",
