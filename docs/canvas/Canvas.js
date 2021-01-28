@@ -17,7 +17,7 @@ export const useStylesCanvas = makeStyles((theme) => ({
         position: "relative",
         border: "2px solid #808080",
         backgroundColor: "#FFFFFF",
-        width: "95%",
+        width: "80%",
         height: height => height - 67 - 115,
         margin: "auto",
     },
@@ -81,10 +81,10 @@ export default function Canvas(props){
     } */
 
     //document.getElementById('canvas').addEventListener('touch', )
-    
+
     return(
         <Fragment>
-            <Box id="canvas" className={classes.canvas} onClick={(event) => handleClickCanvas(event)} ref={measuredRef} onTouchStart={props.onTouch()}>
+            <Box id="canvas" className={classes.canvas} onClick={(event) => handleClickCanvas(event)} ref={measuredRef} onTouchStart={props.onTouchStart} onTouchEnd={props.onTouchEnd}>
                 {currentList.map((value) => stamp(value))}
             </Box>
             {/* <button type="button" onClick={handleTestStamp}>test stamp</button> */}

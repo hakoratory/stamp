@@ -63,10 +63,18 @@ function App(){
     }) */
     let swipeRef
 
-    const handleTouch = () => {
-        console.log('onTouchApp')
-        alert('ontouch app')
+    const handleTouchStart = () => {
+        console.log('onTouchStart')
         //swipeRef.disableScrolling(false)
+        //console.log(swipeRef.props.swipeOptions.disableScroll)
+        swipeRef.props.swipeOptions.disableScroll = true
+    }
+
+    const handleTouchEnd = () => {
+        console.log('onTouchEnd')
+        //swipeRef.disableScrolling(false)
+        //console.log(swipeRef.props.swipeOptions.disableScroll)
+        swipeRef.props.swipeOptions.disableScroll = false
     }
 
     return(
@@ -74,10 +82,10 @@ function App(){
             <Header onClick={handleClick_modal}/>
             <ReactSwipe
                 className="carousel"
-                swipeOptions={{continuous: false}}
+                swipeOptions={{continuous: false,disableScroll: false}}
                 ref={el => swipeRef = el}>
                 <Box width="95%">
-                    <Canvas swipeRef={swipeRef} onTouch={() => handleTouch()}/>
+                    <Canvas swipeRef={swipeRef} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}/>
                 </Box>
                 <Box width="95%">
                     <Palette />
