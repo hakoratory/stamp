@@ -118,7 +118,7 @@ function App(){
                         //positionY={positionY}
                         />
                 </Box>
-                <Box width="95%">
+                <Box width="100%">
                     <Palette  onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}/>
                 </Box>
             </ReactSwipe>

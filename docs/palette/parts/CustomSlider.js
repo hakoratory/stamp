@@ -46,7 +46,7 @@ function CustomSlider(props){
     return(
       <Box display="flex" flexDirection="row" alignItems="center" height="30px">
             <Typography variant="subtitle2">
-                <Box lineHeight={1} pr={1}>
+                <Box lineHeight={1} pr={1} width="25px" textAlign="center">
                     {props.displayName}
                 </Box>
             </Typography>

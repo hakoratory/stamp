@@ -21,7 +21,7 @@ export const CustomColor = ({displayName, color, width, hsl, hsv, onChange}) => 
         <Fragment>
             <Box display="flex" flexDirection="row" alignItems="center">
                 <Typography variant="subtitle2">
-                    <Box lineHeight={3} pr={1}>
+                    <Box lineHeight={3} pr={1} width="25px" textAlign="center">
                         {displayName}
                     </Box>
                 </Typography>
