@@ -12,7 +12,7 @@ export const CustomColor = ({displayName, color, width, hsl, hsv, onChange}) => 
           },
           saturation: {
             width: "100%",
-            height: 100,
+            height: 30,
             position: "relative"
           },
     }

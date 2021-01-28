@@ -10,7 +10,7 @@ export const IOSSlider = withStyles({
   root: {
     color: '#3880ff',
     height: 2,
-    padding: '13px 0',
+    padding: '10px 0',
   },
   thumb: {
     height: 20,
@@ -39,18 +39,18 @@ export const IOSSlider = withStyles({
 })(Slider);
 
 const width = {
-    width: "80px"
+    width: "70px"
 }
 
 function CustomSlider(props){
     return(
-      <Box display="flex" flexDirection="row" alignItems="center">
+      <Box display="flex" flexDirection="row" alignItems="center" height="30px">
             <Typography variant="subtitle2">
                 <Box lineHeight={1} pr={1}>
                     {props.displayName}
                 </Box>
             </Typography>
-            <Box flexGrow={1} pt={1}>
+            <Box flexGrow={2} pt={1}>
               {isIOS
                 ? <IOSSlider 
                     id={props.id}
