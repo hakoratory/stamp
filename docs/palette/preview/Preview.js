@@ -11,7 +11,7 @@ function Preview(){
     
     return (
         <Box display="flex" alignItems="center" justifyContent="center">
-            <Box display="flex" bgcolor="white" className={classes.preview} alignItems="center" justifyContent="center" border={1}>
+            <Box display="flex" bgcolor="white" className={classes.preview} alignItems="center" justifyContent="center">
                 <Box className="preview_body" style={getPreview(currentConf)}></Box>
             </Box>
         </Box>

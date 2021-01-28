@@ -44,42 +44,38 @@ const width = {
 
 function CustomSlider(props){
     return(
-        <Fragment>
-            <Grid container spacing={2}>
-                <Grid item>
-                    <Typography variant="subtitle2">
-                        <Box lineHeight={2}>
-                            {props.displayName}
-                        </Box>
-                    </Typography>
-                </Grid>
-                <Grid item xs>
-                    {isIOS
-                        ? <IOSSlider 
-                            id={props.id}
-                            step={props.step}
-                            max={props.max}
-                            onChange={props.onChange}
-                            value={props.value}
-                            />
-                        : <Slider
-                            id={props.id}
-                            step={props.step}
-                            max={props.max}
-                            onChange={props.onChange}
-                            value={props.value}
-                            />
-                    }
-                </Grid>
-                <Grid item xs={2}>
-                    <Typography variant="subtitle2">
-                        <Box textAlign="right" lineHeight={2} style={width}>
-                            {props.value}/{props.max}
-                        </Box>
-                    </Typography>
-                </Grid>
-            </Grid>
-        </Fragment>
+      <Box display="flex" flexDirection="row" alignItems="center">
+            <Typography variant="subtitle2">
+                <Box lineHeight={1} pr={1}>
+                    {props.displayName}
+                </Box>
+            </Typography>
+            <Box flexGrow={1} pt={1}>
+              {isIOS
+                ? <IOSSlider 
+                    id={props.id}
+                    step={props.step}
+                    max={props.max}
+                    onChange={props.onChange}
+                    value={props.value}
+                    />
+                : <Slider
+                    id={props.id}
+                    step={props.step}
+                    max={props.max}
+                    onChange={props.onChange}
+                    value={props.value}
+                    />
+              }
+          </Box>
+          <Box>
+              <Typography variant="subtitle2">
+                  <Box textAlign="right" style={width}>
+                      {props.value}/{props.max}
+                  </Box>
+              </Typography>
+          </Box>
+        </Box>
     )
 }
 

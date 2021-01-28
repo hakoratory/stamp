@@ -2,7 +2,6 @@ import { createReducer } from '@reduxjs/toolkit'
 import { add, testStamp } from './actions'
 
 export const listReducer = createReducer(null, (builder) => {
-    console.log('test')
     builder
         .addCase(add, (state, action) => {
             //console.log('listReducer add')

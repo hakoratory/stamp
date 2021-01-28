@@ -1,25 +1,30 @@
-import React, {Fragment, useState, useEffect} from 'react'
+import React, {Fragment, useState, useEffect, useRef, useCallback} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as selectors from '../redux/rootSelectors'
 import { Box, makeStyles } from '@material-ui/core'
 import {
     add,
-    testStamp,
 } from '../redux/ducks/stamp/list/actions'
 import {
     set,
 } from '../redux/ducks/stamp/step/actions'
 
 export const useStylesCanvas = makeStyles((theme) => ({
+    frame: {
+        
+    },
     canvas: {
+        position: "relative",
         border: "2px solid #808080",
         backgroundColor: "#FFFFFF",
-        width: "100%",
-        height: height => height - 67 - 115
+        width: "95%",
+        height: height => height - 67 - 115,
+        margin: "auto",
     },
 }))
 
-export default function Canvas(){
+
+export default function Canvas(props){
     const dispatch = useDispatch()
     
     const stepNumber = useSelector(selectors.listSelectors.selectStepNumber)
@@ -37,6 +42,17 @@ export default function Canvas(){
         return () => window.removeEventListener('resize', onResize)
     }, [height])
 
+    const [canvasX, setCanvasX] = useState(0)
+    const [canvasY, setCanvasY] = useState(0)
+
+    const measuredRef = useCallback(node => {
+        if(node !== null){
+            setCanvasX(node.getBoundingClientRect().x)
+            setCanvasY(node.getBoundingClientRect().y)
+        }
+    },[])
+
+
     const classes = useStylesCanvas(height)
 
     function stamp(stamp_data){
@@ -53,10 +69,9 @@ export default function Canvas(){
         return <Box style={style} key={stamp_data.number}></Box>
     }
 
-    const handleClick_canvas = (event) => {
+    const handleClickCanvas = (event) => {
         //dispatch(add({x: event.pageX, y: event.pageY, currentConf: currentConf}))
-        console.log('currentList.length is ' + currentList.length)
-        dispatch(add({x: event.pageX, y: event.pageY}))
+        dispatch(add({x: event.pageX - canvasX, y: event.pageY - canvasY}))
         dispatch(set(currentList.length))
     }
 
@@ -64,14 +79,15 @@ export default function Canvas(){
         dispatch(testStamp())
         dispatch(set(4999))
     } */
+
+    //document.getElementById('canvas').addEventListener('touch', )
+    
     return(
         <Fragment>
-            <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-                <Box id="canvas" className={classes.canvas} onClick={(event) => handleClick_canvas(event)}>
-                    {currentList.map((value) => stamp(value))}
-                </Box>
-                {/* <button type="button" onClick={handleTestStamp}>test stamp</button> */}
+            <Box id="canvas" className={classes.canvas} onClick={(event) => handleClickCanvas(event)} ref={measuredRef} onTouchStart={props.onTouch()}>
+                {currentList.map((value) => stamp(value))}
             </Box>
+            {/* <button type="button" onClick={handleTestStamp}>test stamp</button> */}
         </Fragment>
     )
 }

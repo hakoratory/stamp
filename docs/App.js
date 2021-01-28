@@ -1,30 +1,20 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useCallback, useEffect } from 'react'
 import './static/css/App.css'
-import clsx from 'clsx';
 import Header from './header/Header'
-import { Container, makeStyles, Box } from '@material-ui/core'
+import { makeStyles, Box, BottomNavigation, BottomNavigationAction, Divider } from '@material-ui/core'
 import Palette from './palette/Palette'
 import Canvas from './canvas/Canvas'
 import CustomButton from './palette/button/CustomButton'
 import { modal } from './redux/ducks/modal/slice'
 import { useDispatch } from 'react-redux'
-import PersistentDrawerBottom from './drawer/PersistentDrawerBottom'
 import IconButton from '@material-ui/core/IconButton'
-import ExpandLessIcon from '@material-ui/icons/ExpandLess'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { reset } from './redux/ducks/stamp/stampSlice'
-import { back, next, set } from './redux/ducks/stamp/step/actions'
+import { back, next } from './redux/ducks/stamp/step/actions'
+import ReactSwipe from 'react-swipe'
 
 export const useStyles = makeStyles((theme) => ({
-    //TODO move to each components
-    canvas: {
-        border: "2px solid #808080",
-        backgroundColor: "#FFFFFF",
-        width: "100%",
-        height: window.innerHeight - 70 - 120
-    },
-    canvas_frame: {
-        
-    },
     preview: {
         [theme.breakpoints.up('md')]: {
             width: "320px",
@@ -35,32 +25,11 @@ export const useStyles = makeStyles((theme) => ({
             height: "170px",
         },
     },
-    content: {
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        [theme.breakpoints.up('md')]: {
-            marginBottom: -(65 + 350),
-        },
-        [theme.breakpoints.down('sm')]: {
-            marginBottom: -(65 + 175),
-        },
-        [theme.breakpoints.down('xs')]: {
-            marginBottom: -(65 + 175 + 185),
-        },
-    },
-    contentShift: {
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-        marginBottom: 0,
-    },
 }))
 
 
 function App(){
+    const classes = useStyles()
     const dispatch = useDispatch()
 
     // move to Header component
@@ -68,59 +37,71 @@ function App(){
         dispatch(modal())
     }
 
-    const classes = useStyles()
-
-    const [open, setOpen] = useState(false);
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
-
     // create new component
-    const handleClick_button = (event, id) => {
-        switch(id){
-            case "RESET":
-                dispatch(reset())
-                break
-            case "PREV":
-                dispatch(back())
-                break
-            case "NEXT":
-                dispatch(next())
-                break
-            default:
+    const handleClickResetStamp = () => {
+        dispatch(reset())
+    }
+
+    const handleClickResetConf = () => {
+        dispatch(reset())
+    }
+
+    const handleClickBack = () => {
+        dispatch(back())
+    }
+
+    const handleClickNext = () => {
+        dispatch(next())
+    }
+
+    /* const [swipeRef, setSwipeRef] = useState(null)
+    useEffect(() => {
+        console.log('test')
+        if(swipeRef !== null){
+            swipeRef.next()
         }
+    }) */
+    let swipeRef
+
+    const handleTouch = () => {
+        console.log('onTouchApp')
+        //swipeRef.disableScrolling(false)
     }
 
     return(
         <Fragment>
-            <Container maxWidth="xl" className={clsx(classes.content, {[classes.contentShift]: open})}>
-                <Header onClick={handleClick_modal}/>
-                <Canvas />
-                <Box display="flex" flexDirection="row">
-                    <CustomButton id="RESET" onClick={(event, id) => handleClick_button(event, id)}/>
-                    <CustomButton id="PREV" onClick={(event, id) => handleClick_button(event, id)}/>
-                    <CustomButton id="NEXT" onClick={(event, id) => handleClick_button(event, id)}/>
+            <Header onClick={handleClick_modal}/>
+            <ReactSwipe
+                className="carousel"
+                swipeOptions={{continuous: false}}
+                ref={el => swipeRef = el}>
+                <Box width="95%">
+                    <Canvas swipeRef={swipeRef} onTouch={() => handleTouch()}/>
                 </Box>
-                <Box display="flex" alignItems="center" justifyContent="center">
-                    <IconButton  onClick={handleDrawerOpen}>
-                        <ExpandLessIcon fontSize="large"/>
-                    </IconButton>
+                <Box width="95%">
+                    <Palette />
                 </Box>
-            </Container>
-            {/* ドロワーに、ブレークポイントごとの高さを渡す md sm xs */}
-            <PersistentDrawerBottom
-                mdHeight={65 + 350}
-                smHeight={65 + 175}
-                xsHeight={65 + 175 + 185}
-                open={open}
-                onOpen={handleDrawerOpen}
-                onClose={handleDrawerClose}>
-                <Palette className="margin-top-important"/>
-            </PersistentDrawerBottom>
+            </ReactSwipe>
+            <Box>
+                <Box display="flex"flexDirection="row" alignItems="flex-start">
+                    <Box display="flex" flexWrap="wrap" flexGrow={1}>
+                        <CustomButton id="RESET STAMP" onClick={handleClickResetStamp}/>
+                        <CustomButton id="RESET CONF" onClick={handleClickResetConf}/>
+                        <CustomButton id="BACK" onClick={handleClickBack}/>
+                        <CustomButton id="NEXT" onClick={handleClickNext}/>
+                    </Box>
+                    <Box>
+                        <IconButton onClick={() => swipeRef.prev()}>
+                            <ArrowBackIosIcon />      
+                        </IconButton>
+                    </Box>
+                    <Box>
+                        <IconButton onClick={() => swipeRef.next()}>
+                            <ArrowForwardIosIcon />      
+                        </IconButton>
+                    </Box>
+                </Box>
+            </Box>
         </Fragment>
     )
 }
