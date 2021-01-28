@@ -71,11 +71,9 @@ export default function Palette(props){
     }
 
     const handleChangeBackgroundColor = (color) => {
-        console.log(color)
         dispatch(changeBackgroundColor({value: color.hex}))
     }
     
-    //
     const [height, setHeight] = useState(window.innerHeight)
 
     useEffect(() => {
@@ -93,7 +91,7 @@ export default function Palette(props){
             <Box>
                 <Preview />
             </Box>
-            <Box width={sliderGroupWidth} pt={5}>
+            <Box width={sliderGroupWidth} pt={2}>
                 <CustomSlider
                     id={conf.width.id}
                     displayName={conf.width.displayName}
