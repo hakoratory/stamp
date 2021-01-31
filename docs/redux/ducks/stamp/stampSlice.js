@@ -3,6 +3,8 @@ import { confReducer } from './conf/reducer'
 import { stepReducer } from './step/reducer'
 import { createSlice } from '@reduxjs/toolkit'
 import { toColor } from 'react-color-palette/lib/utils/toColor'
+import { reset as resetOfListAction } from './list/actions'
+import { reset as resetOfConfAction } from './conf/actions'
 
 const initialColor = toColor("hex", "#ff8300")
 
@@ -49,9 +51,15 @@ const stampSlice = createSlice({
     name: 'stamp',
     initialState: initialState,
     reducers: {
-        reset: (state, action) => {
+        resetAll: (state, action) => {
             return initialState
-        }
+        },
+        resetList: (state, action) => {
+            state.list = listReducer(state.list, resetOfListAction(initialState.list))
+        },
+        resetConf: (state, action) => {
+            state.conf = confReducer(state.conf, resetOfConfAction(initialState.conf))
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -76,6 +84,6 @@ const stampSlice = createSlice({
     }
 })
 
-export const { reset } = stampSlice.actions
+export const { resetAll, resetList, resetConf } = stampSlice.actions
 
 export default stampSlice.reducer

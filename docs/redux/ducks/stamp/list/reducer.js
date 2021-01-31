@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { add } from './actions'
+import { add, reset } from './actions'
 
 export const listReducer = createReducer(null, (builder) => {
     builder
@@ -17,5 +17,8 @@ export const listReducer = createReducer(null, (builder) => {
                 rotate: state.conf.rotate.value,
             })
             return list
+        })
+        .addCase(reset, (state, action) => {
+            return action.payload
         })
 })

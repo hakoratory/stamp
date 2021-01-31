@@ -6,6 +6,7 @@ import {
     changeRotate,
     changeOpacity,
     changeBackgroundColor,
+    reset,
 } from './actions'
 export const confReducer = createReducer(null, (builder) => {
     builder
@@ -27,5 +28,8 @@ export const confReducer = createReducer(null, (builder) => {
         .addCase(changeBackgroundColor, (state, action) => {
             state.backgroundColor.value = action.payload.hex
             state.backgroundColor.color = action.payload
+        })
+        .addCase(reset, (state, action) => {
+            return action.payload
         })
 })

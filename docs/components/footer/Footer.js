@@ -4,7 +4,7 @@ import CustomCssButton from '../palette/parts/CustomCssButton'
 import { useClientRect } from '../../hooks/useClientRect'
 import { initFooter } from '../../redux/ducks/client-rect/slice'
 import { useDispatch } from 'react-redux'
-import { reset } from '../../redux/ducks/stamp/stampSlice'
+import { resetList, resetConf } from '../../redux/ducks/stamp/stampSlice'
 import { back, next } from '../../redux/ducks/stamp/step/actions'
 
 export default function Footer(){
@@ -18,11 +18,11 @@ export default function Footer(){
     },[rect])
 
     const handleClickResetStamp = () => {
-        dispatch(reset())
+        dispatch(resetList())
     }
 
     const handleClickResetConf = () => {
-        dispatch(reset())
+        dispatch(resetConf())
     }
 
     const handleClickBack = () => {
