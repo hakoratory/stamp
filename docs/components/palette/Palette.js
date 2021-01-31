@@ -132,7 +132,7 @@ export default function Palette(props){
                 <Box ref={previewRef}>
                     <Preview />
                 </Box>
-                <Box width={sliderGroupWidth} pt={0} ref={sliderRef}>
+                <Box width={sliderGroupWidth} ref={sliderRef} pb={2}>
                     <CustomSlider
                         id={conf.width.id}
                         displayName={conf.width.displayName}
@@ -178,7 +178,7 @@ export default function Palette(props){
                         value={conf.opacity.value}
                         onChange={(event, newValue) => handleChangeOpacity(event, newValue)}
                         />
-                    <Box>
+                    <Box pt={2}>
                         <Hue
                             width={sliderRect.width}
                             color={conf.backgroundColor.color}
@@ -186,7 +186,7 @@ export default function Palette(props){
                             />
                     </Box>
                 </Box>
-                <Box pt={1}>
+                <Box>
                     <Saturation
                         width={saturationRect.width}
                         height={saturationRect.height}
