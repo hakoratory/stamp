@@ -4,8 +4,8 @@ export function getPreview(conf){
         height: conf.height.value + "px",
         borderRadius: conf.borderRadius.value + "px",
         opacity: conf.opacity.value,
-        backgroundColor: conf.backgroundColor.value,
+        backgroundColor: conf.backgroundColor.color.hex,
         transform: "rotate(" + conf.rotate.value + "deg)",
-        border: "0.1px solid #000"
+        border: "1px solid #C0C0C0"
     }
 }

@@ -25,6 +25,7 @@ export const confReducer = createReducer(null, (builder) => {
             state.opacity.value = action.payload.value
         })
         .addCase(changeBackgroundColor, (state, action) => {
-            state.backgroundColor.value = action.payload.value
+            state.backgroundColor.value = action.payload.hex
+            state.backgroundColor.color = action.payload
         })
 })

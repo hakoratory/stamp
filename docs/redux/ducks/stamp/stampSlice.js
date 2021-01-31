@@ -1,7 +1,10 @@
 import { listReducer } from './list/reducer'
 import { confReducer } from './conf/reducer'
 import { stepReducer } from './step/reducer'
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
+import { toColor } from 'react-color-palette/lib/utils/toColor'
+
+const initialColor = toColor("hex", "#ff8300")
 
 const initialState = {
     list: [],
@@ -36,7 +39,8 @@ const initialState = {
             id: "background color",
             displayName: "C",
             value: "#ff8300",
-            width: "100%"
+            width: 532,
+            color: initialColor,
         },
     }
 }
@@ -46,7 +50,6 @@ const stampSlice = createSlice({
     initialState: initialState,
     reducers: {
         reset: (state, action) => {
-            console.log('reset')
             return initialState
         }
     },
@@ -55,21 +58,18 @@ const stampSlice = createSlice({
         .addMatcher(
             (action) => action.type.startsWith('stamp/list'),
             (state, action) => {
-                //console.log('stamp/list matched')
                 state.list = listReducer(state, action)
             }
         )
         .addMatcher(
             (action) => action.type.startsWith('stamp/step'),
             (state, action) => {
-                //console.log('stamp/step matched')
                 state.stepNumber = stepReducer(state, action)
             }
         )
         .addMatcher(
             (action) => action.type.startsWith('stamp/conf'),
             (state, action) => {
-                //console.log('stamp/conf matched')
                 state.conf = confReducer(state.conf, action)
             }
         )

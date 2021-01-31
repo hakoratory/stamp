@@ -1,0 +1,1 @@
+export const selectStepNumber = state => state.stamp.stepNumber
