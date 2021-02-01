@@ -21,6 +21,7 @@ import { useColor } from 'react-color-palette'
 import { Hue } from 'react-color-palette/lib/components/Hue'
 import { Saturation } from 'react-color-palette/lib/components/Saturation'
 import { useRect } from '../../hooks/useRect'
+import { useTouchToMouse } from '../../hooks/useTouchToMouse'
 
 export default function Palette(props){
     const dispatch = useDispatch()
@@ -123,8 +124,10 @@ export default function Palette(props){
             observer.disconnect();
         }
     },[])
-    console.log(saturationRect.width)
-    console.log(saturationRect.height)
+
+    const touchableHueRef = useTouchToMouse(true)
+
+    const touchableSatuRef = useTouchToMouse(true)
 
     return (
         <Box className={classes.frame} ref={paletteRef}>
@@ -178,7 +181,7 @@ export default function Palette(props){
                         value={conf.opacity.value}
                         onChange={(event, newValue) => handleChangeOpacity(event, newValue)}
                         />
-                    <Box pt={2}>
+                    <Box pt={2} ref={touchableHueRef}>
                         <Hue
                             width={sliderRect.width}
                             color={conf.backgroundColor.color}
@@ -186,7 +189,7 @@ export default function Palette(props){
                             />
                     </Box>
                 </Box>
-                <Box>
+                <Box ref={touchableSatuRef}>
                     <Saturation
                         width={saturationRect.width}
                         height={saturationRect.height}

@@ -7,8 +7,8 @@ export const useInnerHeight = () => {
         const onResize = () => {
             return setHeight(window.innerHeight)
         }
-        window.addEventListener('resize', onResize)
-        return () => window.removeEventListener('resize', onResize)
+        window.addEventListener('resize', onResize, {passive: true})
+        return () => window.removeEventListener('resize', onResize, {passive: true})
     }, [height])
     
     return height
