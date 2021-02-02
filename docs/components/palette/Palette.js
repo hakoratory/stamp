@@ -15,13 +15,12 @@ import {
     changeBackgroundColor,
 } from '../../redux/ducks/stamp/conf/actions'
 import { useStampStyles } from '../../styles/useStampStyles'
-import CustomColor from './parts/CustomColor'
-import { useClientRect } from '../../hooks/useClientRect'
-import { useColor } from 'react-color-palette'
+import { Color } from 'react-color-palette'
 import { Hue } from 'react-color-palette/lib/components/Hue'
 import { Saturation } from 'react-color-palette/lib/components/Saturation'
 import { useRect } from '../../hooks/useRect'
 import { useTouchToMouse } from '../../hooks/useTouchToMouse'
+import classNames from 'classnames'
 
 export default function Palette(props){
     const dispatch = useDispatch()
@@ -87,9 +86,11 @@ export default function Palette(props){
         footerHeight: footerRect.height,
     })
 
+    const canvasFrame = classNames(classes.frame_common, classes.frame_shape)
 
-    const [saturationRect, setSaturationRect] = useRect(0,0)
     const [sliderRect, setSliderRect] = useRect(0,0)
+    const [paletteRect, setPaletteRect] = useRect(0,0)
+    const [previewRect, setPreviewRect] = useRect(0,0)
 
     const paletteRef = useRef(null)
     const sliderRef = useRef(null)
@@ -98,21 +99,21 @@ export default function Palette(props){
     useEffect(() => {
         const observer = new ResizeObserver((entries) => {
             if(paletteRef.current){
-
+                setPaletteRect(paletteRef.current.getBoundingClientRect().width,paletteRef.current.getBoundingClientRect().height)
             }
             if(sliderRef.current){
                 setSliderRect(sliderRef.current.getBoundingClientRect().width, sliderRef.current.getBoundingClientRect().height)
             }
             if(previewRef.current){
-
+                setPreviewRect(previewRef.current.getBoundingClientRect().width,previewRef.current.getBoundingClientRect().height)
             }
 
-            let saturationHeight = paletteRef.current.getBoundingClientRect().height - previewRef.current.getBoundingClientRect().height - sliderRef.current.getBoundingClientRect().height
+            /* let saturationHeight = paletteRect.height - previewRect.height - sliderRect.height
             
             setSaturationRect(
                 sliderRef.current.getBoundingClientRect().width,
                 saturationHeight > 200 ? 200 : saturationHeight * 0.85
-            )
+            ) */
             
         })
 
@@ -130,7 +131,7 @@ export default function Palette(props){
     const touchableSatuRef = useTouchToMouse(true)
 
     return (
-        <Box className={classes.frame} ref={paletteRef}>
+        <Box className={canvasFrame} ref={paletteRef}>
             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" onTouchStart={props.onTouchStart} onTouchEnd={props.onTouchEnd}>
                 <Box ref={previewRef}>
                     <Preview />
@@ -191,8 +192,10 @@ export default function Palette(props){
                 </Box>
                 <Box ref={touchableSatuRef}>
                     <Saturation
-                        width={saturationRect.width}
-                        height={saturationRect.height}
+                        width={sliderRect.width}
+                        height={paletteRect.height - previewRect.height - sliderRect.height > 200
+                                    ? 200
+                                    : (paletteRect.height - previewRect.height - sliderRect.height) * 0.85}
                         color={conf.backgroundColor.color}
                         onChange={handleChangeBackgroundColor}
                         />

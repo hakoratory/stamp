@@ -8,30 +8,33 @@ export const useTouchToMouse = (children) => {
                             ? ref.current.children[0]
                             : ref.current
 
-        const touchStartToMouseDown = (e) => {
+        const touchStartToMouseDown = (event) => {
 
-            const touchMoveToMouseMove = (e) => {
-                e.clientX = e.changedTouches[0].clientX
-                e.clientY = e.changedTouches[0].clientY
+            const touchMoveToMouseMove = (event) => {
+                event.clientX = event.changedTouches[0].clientX
+                event.clientY = event.changedTouches[0].clientY
 
-                document.dispatchEvent(new MouseEvent('mousemove', e))
+                document.dispatchEvent(new MouseEvent('mousemove', event))
             }
         
-            const touchEndToMouseUp = (e) => {
-                document.dispatchEvent(new MouseEvent('mouseup', e))
+            const touchEndToMouseUp = (event) => {
+                event.clientX = event.changedTouches[0].clientX
+                event.clientY = event.changedTouches[0].clientY
+                document.dispatchEvent(new MouseEvent('mouseup', event))
+
                 document.removeEventListener('touchmove', touchMoveToMouseMove, {passive: true})
                 document.removeEventListener('touchend', touchEndToMouseUp, {passive: false})
                 // Suppresses mouse events that fire after tapping.
-                e.preventDefault()
+                event.preventDefault()
             }
     
             document.addEventListener('touchmove', touchMoveToMouseMove, {passive: true})
             document.addEventListener('touchend', touchEndToMouseUp, {passive: false})
 
-            e.clientX = e.changedTouches[0].clientX
-            e.clientY = e.changedTouches[0].clientY
+            event.clientX = event.changedTouches[0].clientX
+            event.clientY = event.changedTouches[0].clientY
 
-            target.dispatchEvent(new MouseEvent('mousedown', e))
+            target.dispatchEvent(new MouseEvent('mousedown', event))
 
         }
 

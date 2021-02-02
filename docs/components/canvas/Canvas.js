@@ -1,12 +1,18 @@
-import React, {Fragment, useEffect } from 'react'
+import React, {Fragment, useEffect, useState } from 'react'
 import { useInnerHeight } from '../../hooks/useInnerHeight'
 import { useDispatch, useSelector } from 'react-redux'
 import * as selectors from '../../redux/rootSelectors'
 import { Box } from '@material-ui/core'
 import {
+    add,
+} from '../../redux/ducks/stamp/list/actions'
+import {
     set,
 } from '../../redux/ducks/stamp/step/actions'
 import { useStampStyles } from '../../styles/useStampStyles'
+import classNames from 'classnames'
+import { useClientRect } from '../../hooks/useClientRect'
+import DummyStamp from './DummyStamp'
 
 export default function Canvas(props){
     const dispatch = useDispatch()
@@ -19,7 +25,6 @@ export default function Canvas(props){
     const headerRect = useSelector(selectors.clientRectSelectors.selectHeaderRect)
     const footerRect = useSelector(selectors.clientRectSelectors.selectFooterRect)
 
-    //console.log(headerRect.height)
     const classes = useStampStyles({
         innerHeight: innerHeight,
         headerHeight: headerRect.height,
@@ -36,27 +41,40 @@ export default function Canvas(props){
             borderRadius: stamp_data.borderRadius + "px",
             backgroundColor: stamp_data.backgroundColor,
             opacity: stamp_data.opacity,
-            transform: "rotate(" + stamp_data.rotate + "deg)"
+            transform: "rotate(" + stamp_data.rotate + "deg)",
         }
         return <Box style={style} key={stamp_data.number}></Box>
     }
 
+    const [canvasRect, canvasRef] = useClientRect()
     const handleClickCanvas = (event) => {
-        props.onClick(event)
+        dispatch(add({
+            x: event.pageX - canvasRect.left,
+            y: event.pageY - canvasRect.top,
+        }))   
         dispatch(set(currentList.length))
     }
 
+    const canvasFrame = classNames(classes.frame_common, classes.frame_shape)
+    const dummyCanvasFrame = classNames(classes.frame_common, classes.frame_shape_dummy)
+
+    
 
     return(
         <Fragment>
             <Box
+                ref={canvasRef}
                 id="canvas"
-                className={classes.frame}
-                onClick={(event) => handleClickCanvas(event)}
+                className={canvasFrame}
                 onTouchStart={props.onTouchStart}
                 onTouchEnd={props.onTouchEnd}
                 >
                 {currentList.map((value) => stamp(value))}
+                <DummyStamp
+                    className={dummyCanvasFrame}
+                    canvasRect={canvasRect}
+                    onClick={handleClickCanvas}
+                    />
             </Box>
         </Fragment>
     )

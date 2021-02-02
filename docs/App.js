@@ -9,9 +9,6 @@ import { useDispatch } from 'react-redux'
 import IconButton from '@material-ui/core/IconButton'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import {
-    add,
-} from './redux/ducks/stamp/list/actions'
 import ReactSwipe from 'react-swipe'
 
 function App(){
@@ -26,20 +23,6 @@ function App(){
     },[])
 
     let swipeRef
-    let positionX = 0
-    let positionY = 0
-
-    useEffect(() => {
-        positionX = swipeRef.containerEl.getBoundingClientRect().left
-        positionY = swipeRef.containerEl.getBoundingClientRect().top
-    },[])
-
-    const handleClickCanvas = (event) => {
-        dispatch(add({
-            x: event.pageX - positionX,
-            y: event.pageY - positionY,
-        }))   
-    }
 
     const handleTouchStart = () => {
         swipeRef.props.swipeOptions.disableScroll = true
@@ -55,9 +38,10 @@ function App(){
             <ReactSwipe
                 className="carousel"
                 swipeOptions={{continuous: false,disableScroll: false}}
-                ref={el => swipeRef = el}>
+                ref={el => swipeRef = el}
+                >
                 <Box width="85%">
-                    <Box display="flex" flexDirection="row" alignItems="center">
+                    <Box display="flex" flexDirection="row" alignItems="center" p={1}>
                         <Canvas
                             swipeRef={swipeRef}
                             onTouchStart={handleTouchStart}
