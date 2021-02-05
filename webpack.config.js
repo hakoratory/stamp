@@ -8,7 +8,9 @@ module.exports = {
   devtool: 'inline-source-map',
  devServer: {
    contentBase: './docs',
-   historyApiFallback: true,
+   historyApiFallback: {
+     index: 'index_dev.html'
+   },
    openPage: 'stamp/'
  },
  module: {
