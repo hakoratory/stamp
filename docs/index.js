@@ -9,7 +9,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 ReactDOM.render(
     <Provider store={store}>
         <PersistGate loading={<p>loading...</p>} persistor={persistor}>
-            <Router>
+            <Router basename="/stamp">
                 <App />
             </Router>
         </PersistGate>
