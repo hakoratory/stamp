@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import * as urls from '../../static/constants/url'
 import Logo from './Logo'
 import NavigationButton from '../palette/parts/NavigationButton'
 import { Box } from '@material-ui/core';
@@ -22,17 +23,17 @@ function Header(){
     return (
         <Box display="flex" flexDirection="row">
             <Box ref={ref} className={classes.header} flexGrow={1}>
-                <Link to="/">
+                <Link to={urls.STAMP}>
                     <Logo />
                 </Link>
             </Box>
-            <Link to="/" style={{textDecoration: "none"}}>
+            <Link to={urls.STAMP} style={{textDecoration: "none"}}>
                 <NavigationButton>Stamp</NavigationButton>
             </Link>
-            <Link to="/gallery" style={{textDecoration: "none", pointerEvents: "none"}}>
+            <Link to={urls.GALLERY} style={{textDecoration: "none", pointerEvents: "none"}}>
                 <NavigationButton disabled>Gallery</NavigationButton>
             </Link>
-            <Link to="/about" style={{textDecoration: "none"}}>
+            <Link to={urls.ABOUT} style={{textDecoration: "none"}}>
                 <NavigationButton>About</NavigationButton>
             </Link>
         </Box>

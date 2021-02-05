@@ -6,6 +6,7 @@ import {
     Switch,
     useLocation,
 } from 'react-router-dom'
+import * as urls from './static/constants/url'
 import { useClientRect } from './hooks/useClientRect'
 import { useStampStyles } from './styles/useStampStyles'
 import { initHeader } from './redux/ducks/client-rect/slice'
@@ -58,7 +59,7 @@ function App(){
             <Box mb={0.5}>
                 <Header />
             </Box>
-            <Route exact path="/">
+            <Route exact path={urls.STAMP}>
                 <Box>
                     <SwipeableSwitch onChangeIndex={handleChangeIndex} />
                 </Box>
@@ -77,7 +78,7 @@ function App(){
                     </Box>
                 </SwipeableViews>
             </Route>
-            <Route path="/about">
+            <Route path={urls.ABOUT}>
                 <About />
             </Route>
         </Fragment>
