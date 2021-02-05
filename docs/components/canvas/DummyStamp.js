@@ -50,13 +50,16 @@ export default function DummyStamp(props){
     }
 
     const handleMouseDown = (event) => {
+        if(event.button !== 0){
+            return
+        }
+
         showDummyStamp(event, false)
 
         const handleMouseUp = (event) => {
             hideDummyStamp(event)
-    
             props.onClick(event)
-    
+        
             document.removeEventListener('mousemove', handleMouseMove, {passive: true})
             document.removeEventListener('mouseup', handleMouseUp, {passive: false})
         }

@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import Logo from './Logo'
-import AboutDialog from './AboutDialog';
+import NavigationButton from '../palette/parts/NavigationButton'
 import { Box } from '@material-ui/core';
 import { useDispatch } from 'react-redux'
 import { initHeader } from '../../redux/ducks/client-rect/slice'
 import { useStampStyles } from '../../styles/useStampStyles'
 import { useClientRect } from '../../hooks/useClientRect'
-import { modal } from '../../redux/ducks/modal/slice'
 
 function Header(){
     const dispatch = useDispatch()
+    const classes = useStampStyles()
 
     const [rect, ref] = useClientRect()
     useEffect(() => {
@@ -18,16 +19,22 @@ function Header(){
         }
     },[rect])
 
-    const handleClickModal = () => {
-        dispatch(modal())
-    }
-
-    const classes = useStampStyles()
-
     return (
-        <Box ref={ref} className={classes.header}>
-            <Logo onClick={handleClickModal}/>
-            <AboutDialog onClick={handleClickModal}/>
+        <Box display="flex" flexDirection="row">
+            <Box ref={ref} className={classes.header} flexGrow={1}>
+                <Link to="/">
+                    <Logo />
+                </Link>
+            </Box>
+            <Link to="/" style={{textDecoration: "none"}}>
+                <NavigationButton>Stamp</NavigationButton>
+            </Link>
+            <Link to="/gallery" style={{textDecoration: "none", pointerEvents: "none"}}>
+                <NavigationButton disabled>Gallery</NavigationButton>
+            </Link>
+            <Link to="/about" style={{textDecoration: "none"}}>
+                <NavigationButton>About</NavigationButton>
+            </Link>
         </Box>
     )
 }

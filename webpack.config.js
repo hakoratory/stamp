@@ -8,6 +8,7 @@ module.exports = {
   devtool: 'inline-source-map',
  devServer: {
    contentBase: './docs',
+   historyApiFallback: true,
  },
  module: {
      rules: [

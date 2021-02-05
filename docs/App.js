@@ -1,18 +1,34 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import './static/css/App.css'
-import Header from './components/header/Header'
+import {
+    Route,
+    Link,
+    Switch,
+    useLocation,
+} from 'react-router-dom'
+import { useClientRect } from './hooks/useClientRect'
+import { useStampStyles } from './styles/useStampStyles'
+import { initHeader } from './redux/ducks/client-rect/slice'
+
+import Logo from './components/header/Logo'
 import Footer from './components/footer/Footer'
-import { Box } from '@material-ui/core'
+import { Box, Button, Typography } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
 import Palette from './components/palette/Palette'
+import PaletteButtons from './components/footer/PaletteButtons'
 import Canvas from './components/canvas/Canvas'
+import CanvasButtons from './components//footer/CanvasButtons'
 import { useDispatch } from 'react-redux'
 import IconButton from '@material-ui/core/IconButton'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ReactSwipe from 'react-swipe'
+import SwipeableViews from 'react-swipeable-views'
+import Header from './components/header/Header'
+import About from './components/header/About'
+import SwipeableSwitch from './components/stamp/SwipeableSwitch'
 
 function App(){
-    const dispatch = useDispatch()
 
     useEffect(() => {
         function noScroll(event){
@@ -22,51 +38,48 @@ function App(){
         document.addEventListener('touchmove', noScroll, { passive: false });
     },[])
 
-    let swipeRef
+    const [index, setIndex] = useState(1)
 
-    const handleTouchStart = () => {
-        swipeRef.props.swipeOptions.disableScroll = true
-    }
+    const location = useLocation()
+    useEffect(() => {
+        setIndex(0)
 
-    const handleTouchEnd = () => {
-        swipeRef.props.swipeOptions.disableScroll = false
+        return () => {
+            setIndex(1)
+        }
+    },[location])
+
+    const handleChangeIndex = (index) => {
+        setIndex(index)
     }
 
     return(
         <Fragment>
-            <Header/>
-            <ReactSwipe
-                className="carousel"
-                swipeOptions={{continuous: false,disableScroll: false}}
-                ref={el => swipeRef = el}
-                >
-                <Box width="85%">
-                    <Box display="flex" flexDirection="row" alignItems="center" p={1}>
-                        <Canvas
-                            swipeRef={swipeRef}
-                            onTouchStart={handleTouchStart}
-                            onTouchEnd={handleTouchEnd}
-                            onClick={(event) => handleClickCanvas(event)}
-                            />
-                        <Box>
-                            <IconButton onClick={() => swipeRef.next()} style={{padding: 1}}>
-                                <ArrowForwardIosIcon/>
-                            </IconButton>
+            <Box mb={0.5}>
+                <Header />
+            </Box>
+            <Route exact path="/">
+                <Box>
+                    <SwipeableSwitch onChangeIndex={handleChangeIndex} />
+                </Box>
+                <SwipeableViews index={index} disabled>
+                    <Box width="95%" m="auto">
+                        <Box p={1}>
+                            <Canvas />
+                            <Footer><CanvasButtons /></Footer>
                         </Box>
                     </Box>
-                </Box>
-                <Box width="85%">
-                    <Box display="flex" flexDirection="row" alignItems="center" justifyContent="center">
-                    <Box>
-                        <IconButton onClick={() => swipeRef.prev()} style={{padding: 1}}>
-                            <ArrowBackIosIcon />      
-                        </IconButton>
+                    <Box width="95%" m="auto">
+                        <Box p={1}>
+                            <Palette />
+                            <Footer><PaletteButtons /></Footer>
+                        </Box>
                     </Box>
-                    <Palette  onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}/>
-                    </Box>
-                </Box>
-            </ReactSwipe>
-            <Footer />
+                </SwipeableViews>
+            </Route>
+            <Route path="/about">
+                <About />
+            </Route>
         </Fragment>
     )
 }

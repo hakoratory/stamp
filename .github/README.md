@@ -8,7 +8,7 @@ A tool for drawing pictures by stamping various shapes in the frame.
 
 ## How to stamp
 
-1. Determine the size of the frame (window size)<sup id="note_ref-1"><a href="#note-1">[注1]</a></sup>.
+1. Determine the size of the frame (window size)<sup id="note_ref-1"><a href="#note-1">[*1]</a></sup>.
 2. Use the sliders to change the size, shape, opacity, and color of the stamp.
 3. Let's stamp!
 4. Pressing the RESET button initializes the stamps you have pressed, the slider positions, and the stamp preview.

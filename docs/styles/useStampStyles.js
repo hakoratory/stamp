@@ -8,7 +8,7 @@ export const useStampStyles = makeStyles((theme) => ({
         position: "relative",
         overflow: "hidden",
         width: "100%",
-        height: arg => (arg.innerHeight * 0.95) - arg.headerHeight - arg.footerHeight,
+        height: arg => (arg.innerHeight * 0.95) - arg.headerHeight - arg.footerHeight - 30 /* the height of swipeable switch */,
         margin: "auto",
     },
     frame_shape: {
