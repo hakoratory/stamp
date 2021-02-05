@@ -2,13 +2,8 @@ import React from 'react'
 import { Box } from '@material-ui/core'
 import ControlButton from '../palette/parts/ControlButton'
 import { useDispatch } from 'react-redux'
-import {
-    resetList
-} from '../../redux/ducks/stamp/stampSlice'
-import {
-    back,
-    next,
-} from '../../redux/ducks/stamp/step/actions'
+import { resetList } from '../../../redux/ducks/stamp/stampSlice'
+import { back, next } from '../../../redux/ducks/stamp/step/actions'
 
 const CanvasButtons = () => {
     const dispatch = useDispatch()

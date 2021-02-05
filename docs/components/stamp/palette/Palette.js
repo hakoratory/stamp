@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useInnerHeight } from '../../hooks/useInnerHeight'
-import { useMediaQueryUp, useMediaQueryDown } from '../../hooks/useMediaQuery'
+import { useInnerHeight } from '../../../hooks/useInnerHeight'
+import { useMediaQueryUp, useMediaQueryDown } from '../../../hooks/useMediaQuery'
 import { Box } from '@material-ui/core'
 import CustomSlider from './parts/CustomSlider'
 import Preview from './preview/Preview'
 import { useDispatch, useSelector } from 'react-redux'
-import * as selectors from '../../redux/rootSelectors'
+import * as selectors from '../../../redux/rootSelectors'
 import {
     changeWidth,
     changeHeight,
@@ -13,13 +13,12 @@ import {
     changeOpacity,
     changeRotate,
     changeBackgroundColor,
-} from '../../redux/ducks/stamp/conf/actions'
-import { useStampStyles } from '../../styles/useStampStyles'
-import { Color } from 'react-color-palette'
+} from '../../../redux/ducks/stamp/conf/actions'
+import { useStampStyles } from '../../../styles/useStampStyles'
 import { Hue } from 'react-color-palette/lib/components/Hue'
 import { Saturation } from 'react-color-palette/lib/components/Saturation'
-import { useRect } from '../../hooks/useRect'
-import { useTouchToMouse } from '../../hooks/useTouchToMouse'
+import { useRect } from '../../../hooks/useRect'
+import { useTouchToMouse } from '../../../hooks/useTouchToMouse'
 import classNames from 'classnames'
 
 export default function Palette(props){

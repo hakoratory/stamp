@@ -1,9 +1,9 @@
 import React from 'react'
-import { Grid, Box } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import { useSelector } from 'react-redux'
-import * as selectors from '../../../redux/rootSelectors'
-import { useStampStyles } from '../../../styles/useStampStyles'
-import { getPreview } from '../../../redux/utils'
+import * as selectors from '../../../../redux/rootSelectors'
+import { useStampStyles } from '../../../../styles/useStampStyles'
+import { getPreview } from '../../../../redux/utils'
 
 function Preview(){
     const classes = useStampStyles()

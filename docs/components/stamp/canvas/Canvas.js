@@ -1,18 +1,15 @@
-import React, {Fragment, useEffect, useState } from 'react'
-import { useInnerHeight } from '../../hooks/useInnerHeight'
+import React, {Fragment, useEffect } from 'react'
+import { useInnerHeight } from '../../../hooks/useInnerHeight'
 import { useDispatch, useSelector } from 'react-redux'
-import * as selectors from '../../redux/rootSelectors'
+import * as selectors from '../../../redux/rootSelectors'
 import { Box } from '@material-ui/core'
-import {
-    add,
-} from '../../redux/ducks/stamp/list/actions'
-import {
-    set,
-} from '../../redux/ducks/stamp/step/actions'
-import { useStampStyles } from '../../styles/useStampStyles'
+import { add } from '../../../redux/ducks/stamp/list/actions'
+import { set } from '../../../redux/ducks/stamp/step/actions'
+import { useStampStyles } from '../../../styles/useStampStyles'
 import classNames from 'classnames'
-import { useClientRect } from '../../hooks/useClientRect'
+import { useClientRect } from '../../../hooks/useClientRect'
 import DummyStamp from './DummyStamp'
+import { useLocation } from 'react-router-dom'
 
 export default function Canvas(props){
     const dispatch = useDispatch()
@@ -58,7 +55,18 @@ export default function Canvas(props){
     const canvasFrame = classNames(classes.frame_common, classes.frame_shape)
     const dummyCanvasFrame = classNames(classes.frame_common, classes.frame_shape_dummy)
 
-    
+    const location = useLocation()
+
+    useEffect(() => {
+        function noScroll(event){
+            event.preventDefault();
+        }
+        document.addEventListener('touchmove', noScroll, { passive: false });
+
+        return () => {
+            document.removeEventListener('touchmove', noScroll, { passive: false });
+        }
+    },[location])
 
     return(
         <Fragment>

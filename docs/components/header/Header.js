@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import * as urls from '../../static/constants/url'
 import Logo from './Logo'
-import NavigationButton from '../palette/parts/NavigationButton'
+import NavigationButton from '../stamp/palette/parts/NavigationButton'
 import { Box } from '@material-ui/core';
 import { useDispatch } from 'react-redux'
 import { initHeader } from '../../redux/ducks/client-rect/slice'

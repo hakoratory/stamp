@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Box } from '@material-ui/core'
 import { useSelector } from 'react-redux'
-import * as selectors from '../../redux/rootSelectors'
-import { useTouchToMouse } from '../../hooks/useTouchToMouse'
+import * as selectors from '../../../redux/rootSelectors'
+import { useTouchToMouse } from '../../../hooks/useTouchToMouse'
 
 export default function DummyStamp(props){
     const currentConf = useSelector(selectors.confSelectors.selectConf)
