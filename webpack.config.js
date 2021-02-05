@@ -9,6 +9,7 @@ module.exports = {
  devServer: {
    contentBase: './docs',
    historyApiFallback: true,
+   openPage: 'stamp/'
  },
  module: {
      rules: [
@@ -43,5 +44,6 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'docs/'),
+    publicPath: '/stamp/'
   }, 
 };

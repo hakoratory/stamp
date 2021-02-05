@@ -1,3 +1,4 @@
-export const STAMP = process.env.NODE_ENV === 'development' ? "/" : "/"
-export const GALLERY = process.env.NODE_ENV === 'development' ? "/gallery" : "/gallery/"
-export const ABOUT = process.env.NODE_ENV === 'development' ? "/about" : "/about/"
+export const BASE_NAME = "/stamp"
+export const STAMP = "/"
+export const GALLERY =  "/gallery/"
+export const ABOUT = "/about/"
