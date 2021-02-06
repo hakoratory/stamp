@@ -20,6 +20,9 @@ import { Saturation } from 'react-color-palette/lib/components/Saturation'
 import { useRect } from '../../../hooks/useRect'
 import { useTouchToMouse } from '../../../hooks/useTouchToMouse'
 import classNames from 'classnames'
+/* Do not delete it as it is necessary to display the hue color.  */
+import { Color } from 'react-color-palette'
+/* end */
 
 export default function Palette(props){
     const dispatch = useDispatch()
