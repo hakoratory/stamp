@@ -14,7 +14,7 @@ export default function About(){
                 Version
             </Typography>
             <Typography variant="body1" gutterBottom>
-                3.0
+                3.1
             </Typography>
             <Typography variant="h4" gutterBottom>
                 How to stamp
