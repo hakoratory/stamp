@@ -24,7 +24,7 @@ const CanvasButtons = () => {
 
     const handleClickShare = () => {
         // Redirect to reload the screen.
-        window.location.href = urls.SHARE
+        window.location.href = urls.ROOT_URL + urls.SHARE
     }
 
     return (
