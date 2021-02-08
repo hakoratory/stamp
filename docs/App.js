@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import './static/css/App.css'
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import * as urls from './static/constants/url'
 import { Box } from '@material-ui/core'
 import Header from './components/header/Header'
@@ -24,7 +24,6 @@ function App(){
                 <About />
             </Route>
             <Route path={urls.SHARE}>
-                <Redirect to={urls.SHARE}>test</Redirect>
                 <Share />
             </Route>
         </Fragment>
