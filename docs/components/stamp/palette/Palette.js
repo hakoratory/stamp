@@ -20,6 +20,7 @@ import { Saturation } from 'react-color-palette/lib/components/Saturation'
 import { useRect } from '../../../hooks/useRect'
 import { useTouchToMouse } from '../../../hooks/useTouchToMouse'
 import classNames from 'classnames'
+import { useFrameStyles } from '../../../hooks/useFrameStyles'
 /* Do not delete it as it is necessary to display the hue color.  */
 import { Color } from 'react-color-palette'
 /* end */
@@ -77,18 +78,9 @@ export default function Palette(props){
     const handleChangeBackgroundColor = (color) => {
         dispatch(changeBackgroundColor(color))
     }
-    
-    const innerHeight = useInnerHeight()
-    const headerRect = useSelector(selectors.clientRectSelectors.selectHeaderRect)
-    const footerRect = useSelector(selectors.clientRectSelectors.selectFooterRect)
 
-    const classes = useStampStyles({
-        innerHeight: innerHeight,
-        headerHeight: headerRect.height,
-        footerHeight: footerRect.height,
-    })
-
-    const canvasFrame = classNames(classes.frame_common, classes.frame_shape)
+    const classes = useFrameStyles()
+    const canvasFrame = classNames(classes.common, classes.shape)
 
     const [sliderRect, setSliderRect] = useRect(0,0)
     const [paletteRect, setPaletteRect] = useRect(0,0)

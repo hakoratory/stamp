@@ -8,13 +8,15 @@ const useStyles = makeStyles(theme => ({
         fontWeight: "bold",
         border: "none",
         borderRadius: "0px",
+        padding: "0px",
+        lineHeight: "40px",
         [theme.breakpoints.up('sm')]: {
             width: "150px",
             fontSize: "0.9em"
         },
         [theme.breakpoints.down('xs')]: {
-            width: "75px",
-            fontSize: "0.8em"
+            width: "60px",
+            fontSize: "0.7em"
         },
     }
 }))

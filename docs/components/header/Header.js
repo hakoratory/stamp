@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Fragment, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import * as urls from '../../static/constants/url'
 import Logo from './Logo'
 import NavigationButton from '../stamp/palette/parts/NavigationButton'
@@ -20,6 +20,8 @@ function Header(){
         }
     },[rect])
 
+    const location = useLocation()
+
     return (
         <Box display="flex" flexDirection="row">
             <Box ref={ref} className={classes.header} flexGrow={1}>
@@ -27,15 +29,19 @@ function Header(){
                     <Logo />
                 </Link>
             </Box>
-            <Link to={urls.STAMP} style={{textDecoration: "none"}}>
-                <NavigationButton>Stamp</NavigationButton>
-            </Link>
-            <Link to={urls.GALLERY} style={{textDecoration: "none", pointerEvents: "none"}}>
-                <NavigationButton disabled>Gallery</NavigationButton>
-            </Link>
-            <Link to={urls.ABOUT} style={{textDecoration: "none"}}>
-                <NavigationButton>About</NavigationButton>
-            </Link>
+            { location.pathname !== '/share/' &&
+                <Fragment>
+                    <Link to={urls.STAMP} style={{textDecoration: "none"}}>
+                        <NavigationButton>Stamp</NavigationButton>
+                    </Link>
+                    <Link to={urls.GALLERY} style={{textDecoration: "none", pointerEvents: "none"}}>
+                        <NavigationButton disabled>Gallery</NavigationButton>
+                    </Link>
+                    <Link to={urls.ABOUT} style={{textDecoration: "none"}}>
+                        <NavigationButton>About</NavigationButton>
+                    </Link>
+                </Fragment>
+            }
         </Box>
     )
 }

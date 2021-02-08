@@ -10,6 +10,7 @@ import classNames from 'classnames'
 import { useClientRect } from '../../../hooks/useClientRect'
 import DummyStamp from './DummyStamp'
 import { useLocation } from 'react-router-dom'
+import { useFrameStyles } from '../../../hooks/useFrameStyles'
 
 export default function Canvas(props){
     const dispatch = useDispatch()
@@ -17,16 +18,6 @@ export default function Canvas(props){
     const stepNumber = useSelector(selectors.stepSelectors.selectStepNumber)
     const list = useSelector(selectors.listSelectors.selectList)
     const currentList = list.slice(0, stepNumber + 1)
-
-    const innerHeight = useInnerHeight()
-    const headerRect = useSelector(selectors.clientRectSelectors.selectHeaderRect)
-    const footerRect = useSelector(selectors.clientRectSelectors.selectFooterRect)
-
-    const classes = useStampStyles({
-        innerHeight: innerHeight,
-        headerHeight: headerRect.height,
-        footerHeight: footerRect.height,
-    })
 
     function stamp(stamp_data){
         let style = {
@@ -52,8 +43,9 @@ export default function Canvas(props){
         dispatch(set(currentList.length))
     }
 
-    const canvasFrame = classNames(classes.frame_common, classes.frame_shape)
-    const dummyCanvasFrame = classNames(classes.frame_common, classes.frame_shape_dummy)
+    const classes = useFrameStyles()
+    const canvasFrame = classNames(classes.common, classes.shape)
+    const dummyCanvasFrame = classNames(classes.common, classes.shape_dummy)
 
     const location = useLocation()
 

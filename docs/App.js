@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react'
 import './static/css/App.css'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import * as urls from './static/constants/url'
 import { Box } from '@material-ui/core'
 import Header from './components/header/Header'
 import Stamp from './components/stamp/Stamp'
 import About from './components/header/About'
+import Share from './components/share/Share'
 
 function App(){
     return(
@@ -21,6 +22,10 @@ function App(){
             </Route>
             <Route path={urls.ABOUT}>
                 <About />
+            </Route>
+            <Route path={urls.SHARE}>
+                <Redirect to={urls.SHARE}>test</Redirect>
+                <Share />
             </Route>
         </Fragment>
     )

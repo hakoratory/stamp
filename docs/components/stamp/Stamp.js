@@ -9,8 +9,7 @@ import Palette from './palette/Palette'
 import CanvasButtons from './footer/CanvasButtons'
 import PaletteButtons from './footer/PaletteButtons'
 
-
-export default function Stamp(){
+function Stamp(){
     const location = useLocation()
 
     const [index, setIndex] = useState(1)
@@ -49,3 +48,5 @@ export default function Stamp(){
         </Fragment>
     )
 }
+
+export default Stamp
