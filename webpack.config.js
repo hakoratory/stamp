@@ -3,15 +3,12 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    index: './docs/index.js',
+    index: './src/index.js',
   },
   devtool: 'inline-source-map',
  devServer: {
-   contentBase: './docs',
-   historyApiFallback: {
-     index: 'index_dev.html'
-   },
-   openPage: 'stamp/'
+   contentBase: './public',
+   historyApiFallback: true,
  },
  module: {
      rules: [
@@ -45,7 +42,6 @@ module.exports = {
  },
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'docs/'),
-    publicPath: '/stamp/'
+    path: path.resolve(__dirname, 'public/'),
   }, 
 };
