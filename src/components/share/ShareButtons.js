@@ -11,8 +11,8 @@ const ShareButtons = () => {
                     data-show-count="false"
                     data-size="large"
                     data-text="Let's stamp!"
-                    data-url="https://hakolab.github.io/stamp/"
-                    data-hashtags="hakolab,stamp"
+                    data-url="https://stamp.hakodatetaro.com/"
+                    data-hashtags="hakoratorio,stamp"
                     >Tweet</a>
             </Box>
         </Fragment>

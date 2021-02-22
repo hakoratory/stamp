@@ -1,5 +1,4 @@
-export const BASE_NAME = "/stamp"
-export const ROOT_URL = "https://hakolab.github.io/stamp"
+export const BASE_NAME = "/"
 export const STAMP = "/"
 export const GALLERY =  "/gallery/"
 export const ABOUT = "/about/"
