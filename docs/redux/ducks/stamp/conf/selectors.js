@@ -1,1 +1,0 @@
-export const selectConf = state => state.stamp.conf

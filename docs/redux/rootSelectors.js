@@ -1,5 +1,0 @@
-export * as listSelectors from './ducks/stamp/list/selectors'
-export * as confSelectors from './ducks/stamp/conf/selectors'
-export * as stepSelectors from './ducks/stamp/step/selectors'
-export * as modalSelectors from './ducks/modal/selectors'
-export * as clientRectSelectors from './ducks/client-rect/selectors'
