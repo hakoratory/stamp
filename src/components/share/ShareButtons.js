@@ -12,7 +12,7 @@ const ShareButtons = () => {
                     data-size="large"
                     data-text="Let's stamp!"
                     data-url="https://stamp.hakodatetaro.com/"
-                    data-hashtags="hakoratorio,stamp"
+                    data-hashtags="hakoratory,stamp"
                     >Tweet</a>
             </Box>
         </Fragment>
