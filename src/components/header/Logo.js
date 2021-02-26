@@ -7,7 +7,6 @@ function Logo(props){
             src={LogoImage}
             alt="stamp"
             height="100%"
-            onClick={props.onClick}
             className="logo"
             />
     )

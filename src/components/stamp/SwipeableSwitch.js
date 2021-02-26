@@ -54,7 +54,7 @@ const StyledBox = (props) => {
 export default function SwipeableSwitch(props){
     const classes = useStyles()
     return (
-        <SwipeableViews onChangeIndex={props.onChangeIndex} enableMouseEvents>
+        <SwipeableViews index={props.index} onChangeIndex={props.onChangeIndex} enableMouseEvents>
             <Box className={classes.root}>
                 <Box display="flex" flexDirection="row" height="30px">
                     <Typography component="div" className={classes.canvas_left} gutterBottom>

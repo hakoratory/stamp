@@ -22,6 +22,10 @@ function Header(){
 
     const location = useLocation()
 
+    const redirectToHakoratory = () => {
+        window.location.href = "https://laboratory.hakodatetaro.com/"
+    }
+
     return (
         <Box display="flex" flexDirection="row">
             <Box ref={ref} className={classes.header} flexGrow={1}>
@@ -31,15 +35,16 @@ function Header(){
             </Box>
             { location.pathname !== '/share/' &&
                 <Fragment>
-                    <Link to={urls.STAMP} style={{textDecoration: "none"}}>
+                    {/* <Link to={urls.STAMP} style={{textDecoration: "none"}}>
                         <NavigationButton>Stamp</NavigationButton>
-                    </Link>
+                    </Link> */}
                     <Link to={urls.GALLERY} style={{textDecoration: "none", pointerEvents: "none"}}>
                         <NavigationButton disabled>Gallery</NavigationButton>
                     </Link>
                     <Link to={urls.ABOUT} style={{textDecoration: "none"}}>
                         <NavigationButton>About</NavigationButton>
                     </Link>
+                    <NavigationButton onClick={redirectToHakoratory}>hakoratory</NavigationButton>
                 </Fragment>
             }
         </Box>

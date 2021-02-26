@@ -16,10 +16,6 @@ function Stamp(){
 
     useEffect(() => {
         setIndex(0)
-
-        return () => {
-            setIndex(1)
-        }
     },[location])
 
     const handleChangeIndex = (index) => {
@@ -29,7 +25,7 @@ function Stamp(){
     return (
         <Fragment>
             <Box>
-                <SwipeableSwitch onChangeIndex={handleChangeIndex} />
+                <SwipeableSwitch index={index} onChangeIndex={handleChangeIndex} />
             </Box>
             <SwipeableViews index={index} disabled>
                 <Box width="95%" m="auto">

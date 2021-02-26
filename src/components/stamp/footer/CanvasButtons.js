@@ -29,7 +29,7 @@ const CanvasButtons = () => {
 
     return (
         <Box display="flex" flexWrap="nowrap">
-            <ControlButton onClick={handleClickResetStamp}>RESET STAMP</ControlButton>
+            <ControlButton onClick={handleClickResetStamp}>RESET CANVAS</ControlButton>
             <ControlButton onClick={handleClickBack}>BACK</ControlButton>
             <ControlButton onClick={handleClickNext}>NEXT</ControlButton>
             <ControlButton onClick={handleClickShare}>SHARE</ControlButton>

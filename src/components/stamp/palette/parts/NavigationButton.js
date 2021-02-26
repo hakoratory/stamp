@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 const NavigationButton = (props) => {
     const classes = useStyles()
-    return <Button className={classes.root} disabled={props.disabled}>{props.children}</Button>
+    return <Button className={classes.root} disabled={props.disabled} onClick={props.onClick}>{props.children}</Button>
 }
 
 export default NavigationButton
