@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --mode production",
+    "deploy": "firebase deploy --only hosting:stamp",
     "start": "webpack serve --open 'Google Chrome' --mode development"
   },
   "author": "",
