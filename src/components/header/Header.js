@@ -23,7 +23,7 @@ function Header(){
     const location = useLocation()
 
     const redirectToHakoratory = () => {
-        window.location.href = "https://laboratory.hakodatetaro.com/"
+        window.location.href = "https://lab.hakoratory.com/"
     }
 
     return (

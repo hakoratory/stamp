@@ -11,7 +11,7 @@ const ShareButtons = () => {
                     data-show-count="false"
                     data-size="large"
                     data-text="Let's stamp!"
-                    data-url="https://stamp.hakodatetaro.com/"
+                    data-url="https://stamp.hakoratory.com/"
                     data-hashtags="hakoratory,stamp"
                     >Tweet</a>
             </Box>
